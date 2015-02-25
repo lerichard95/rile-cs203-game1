@@ -22,7 +22,7 @@ public class Block{
 		return new Block(0);
 	}
 
-	public boolean compare(int i) {
+	public boolean compareType(int i) {
 		return (type == i);
 	}
 	

@@ -1,43 +1,43 @@
 public class PlayField implements TwoDSpaces {
-	// Rectangular
+    // Rectangular
 
-	// implementation of the playing field
+    // implementation of the playing field
 
-	// A 2d array of blocks
-	int width;
-	int height;
+    // A 2d array of blocks
+    int width;
+    int height;
 
-	Block[][] field;
+    Block[][] field;
 
-	public PlayField(int w, int h) {
-		this.width = w;
-		this.height = h;
-		field = new Block[width][height];		
-	}
+    public PlayField(int w, int h) {
+        this.width = w;
+        this.height = h;
+        field = new Block[width][height];
+    }
 
-	public int width() {
-		return this.width;
-	}
+    public int width() {
+        return this.width;
+    }
 
-	public int height() {
-		return this.height;
-	}
+    public int height() {
+        return this.height;
+    }
 
-	public PlayField empty(int width, int height) {
-		// for loop: fill the array with empty blocks
-		for (int i; i <= 0; i++) {
-			
-		}
-		return new PlayField(width, height);
+    public PlayField empty(int width, int height) {
+        // for loop: fill the array with empty blocks
+        for (int i = 0; i <= 0; i++) {
 
-		
-	}
-	
-	
-	public Block getXY(int x, int y){
-		return field[x][y];
-	}
+        }
+        return new PlayField(width, height);
 
-	// Where should collision checking be done?
+
+    }
+
+
+    public Block getXY(int x, int y) {
+        return field[x][y];
+    }
+
+    // Where should collision checking be done?
 
 }

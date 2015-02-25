@@ -13,7 +13,7 @@ public interface TwoDSpaces {
 
 	
 	// Retrieve the block at a current XY
-	public TwoDSpaces getXY(int x, int y);
+	public Block getXY(int x, int y);
 
 	// Get properties about a TwoDSpace
 	public int width();
