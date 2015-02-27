@@ -1,12 +1,14 @@
 //  G1 represents the current state of world... Maybe it should extend
 //  javalib.funworld.World???
 
+import javalib.worldimages.OverlayImages;
 import javalib.worldimages.WorldImage;
 
 public class ColumnsWorld extends javalib.funworld.World {
-    int width = 480;
-    int height = 600;
 
+    static final int BLOCK_SIZE = 20;
+
+    Block testBlock;
     int score = 0;
     boolean winState = false;
 
@@ -16,30 +18,26 @@ public class ColumnsWorld extends javalib.funworld.World {
 
     }
 
-    /* Main method */
-    public static void main(String[] args) {
-        System.out.println("Hello world!");
 
-        Tester tests = new Tester();
-        System.out.println(tests.testsPassedHuh());
+    //  World on-tick()
+    // - What should happen when the game starts???
+    // - Spawn a PlayerPiece for the player to control
+    // - Advance block down once for gravity
+    // - Check for fusion (when PlayerPiece is laid down)
+    // - Check for matches
 
-        //  Big-bang() - starts on-tick
-
-        //  on-tick() - returns world
-        // - What should happen when the game starts???
-        // - Spawn a PlayerPiece for the player to control
-        // - Check for collision (failure)
-        // - Advance block down once for gravity
-        // - Check for fusion (when PlayerPiece is laid down)
-        // - Check for collision (matches)
-
-        //  on-key() - returns world
+    //  World on-key()
         /*  If direction keys are pressed, check for collision— if a move does not collide, move a the correct direction
         *   If cycle keys pressed, cycle the PlayerPiece blocks
         *   If rotation keys are pressed, rotate the PlayerPiece
         *   If quickdrop key is pressed, instantly drop the PlayerPiece
         */
-    }
+
+    //  WorldEnd worldEnds()
+        /*
+        * Override this method for the conditions to check for failure
+        * - Check for collision (failure)
+         */
 
 
     //Need to research this
@@ -47,7 +45,8 @@ public class ColumnsWorld extends javalib.funworld.World {
     public WorldImage makeImage() {
         // TODO Auto-generated method stub
         // Returns a picture of the game
-
+        this.testBlock = new Block(0);
+        return testBlock.draw();
     }
 
 }
