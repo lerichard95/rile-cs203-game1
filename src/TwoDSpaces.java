@@ -1,3 +1,4 @@
+import javalib.worldimages.Posn;
 
 public interface TwoDSpaces {
 	// Should this be an interface or a class??
@@ -13,7 +14,7 @@ public interface TwoDSpaces {
 
 	
 	// Retrieve the block at a current XY
-	public Block getXY(int x, int y);
+	public Block getAtXY(Posn p);
 
 	// Get properties about a TwoDSpace
 	public int width();

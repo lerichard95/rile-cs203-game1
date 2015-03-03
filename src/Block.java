@@ -6,17 +6,15 @@ import javalib.colors.*;
 import java.awt.*;
 
 public class Block {
-    protected BlockType type = MT;
     int h = ColumnsWorld.BLOCK_SIZE;
     int w = ColumnsWorld.BLOCK_SIZE;
 
-    // The coordinates for a block??...
-    int x = 50;
-    int y = 50;
+    // Posn
+    Posn posn;
+    protected BlockType type = BlockType.EMT;
 
-    public Block(int xx, int yy, BlockType tt) {
-        this.x = xx;
-        this.y = yy;
+    public Block(Posn pp, BlockType tt) {
+        posn = pp;
         this.type = tt;
     }
 
@@ -29,14 +27,22 @@ public class Block {
     }
 
     /*
+    * Returns the Posn of this block
+    * @return The Posn of the block
+     */
+
+    public Posn posn() {
+        return this.posn;
+    }
+
+    /*
      * Returns a Block of BlockType MT in the same x y position.
-     * @param xx The x position of the original block
-     * @param yy The y position of the original block
+     * @param pp The Posn position of the original block
      * @return A new Block, reset to BlockType MT
      *
      */
-    public Block clear(int xx, int yy) {
-        return new Block(xx, yy, MT);
+    public Block clear(Posn pp) {
+        return new Block(pp, BlockType.EMT);
     }
 
     /*
@@ -53,14 +59,23 @@ public class Block {
     * @return A boolean
     */
     public boolean isEmpty() {
-        return (this.type == MT);
+        return (this.type == BlockType.EMT);
     }
 
 
     public WorldImage draw() {
         //Return a RectangleImage representing the rectangle
-        return new RectangleImage(new Posn(x, y), this.h, this.w, Color.blue);
+        return new RectangleImage(this.posn, this.h, this.w, Color.blue);
     }
 
+    /*
+    * Returns a boolean if this block is the same as Block bb
+    * @return Returns true if this has the same properties as bb
+     */
+    public boolean equals(Block bb) {
+        return ((this.posn().equals(bb.posn())) &&
+                (this.isSameType(bb))
+        );
+    }
 
 }

@@ -8,14 +8,14 @@ public class Main {
     public static void main(String[] args) {
 
         //This class is specifically for testing— it will run all the tests for the game
-        //Tester tests = new Tester();
-        //System.out.println(tests.testsPassedHuh());
+        Tester tests = new Tester();
+        System.out.println(tests.testsPassedHuh());
 
-
+        /*
         System.out.println("Hello world!");
         ColumnsWorld game = new ColumnsWorld();
         game.bigBang(width, height, 1.0);
-
+    */
 
     }
 

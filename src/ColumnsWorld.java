@@ -1,8 +1,8 @@
 //  G1 represents the current state of world... Maybe it should extend
 //  javalib.funworld.World???
-
-import javalib.worldimages.OverlayImages;
-import javalib.worldimages.WorldImage;
+import javalib.funworld.*;
+import javalib.worldimages.*;
+import javalib.worldcanvas.*;
 
 public class ColumnsWorld extends javalib.funworld.World {
 
@@ -11,6 +11,9 @@ public class ColumnsWorld extends javalib.funworld.World {
     Block testBlock;
     int score = 0;
     boolean winState = false;
+
+    //  Holds the state consisting of the playfield and the player piece
+    //  TODO: Should the player piece be inside of the PlayField?
 
     /* Constructor */
     public ColumnsWorld() {
@@ -45,7 +48,7 @@ public class ColumnsWorld extends javalib.funworld.World {
     public WorldImage makeImage() {
         // TODO Auto-generated method stub
         // Returns a picture of the game
-        this.testBlock = new Block(0);
+        this.testBlock = new Block(new javalib.worldimages.Posn(100, 100), BlockType.EMT);
         return testBlock.draw();
     }
 
