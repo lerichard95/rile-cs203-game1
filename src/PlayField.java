@@ -1,18 +1,21 @@
+import java.util.ArrayList;
+
 public class PlayField implements TwoDSpaces {
     // Rectangular
 
     // implementation of the playing field
-
-    // A 2d array of blocks
+    // An ArrayList of Blocks
     int width;
     int height;
-
-    Block[][] field;
+    ArrayList<Block> field;
 
     public PlayField(int w, int h) {
         this.width = w;
         this.height = h;
-        field = new Block[width][height];
+        field = new ArrayList<Block>( w * h );
+        for (int i = 0; i <= 0; i++) {
+            field.add(new Block(0));
+        }
     }
 
     public int width() {
@@ -26,7 +29,7 @@ public class PlayField implements TwoDSpaces {
     public PlayField empty(int width, int height) {
         // for loop: fill the array with empty blocks
         for (int i = 0; i <= 0; i++) {
-
+            field.add(new Block(0));
         }
         return new PlayField(width, height);
 
@@ -34,8 +37,10 @@ public class PlayField implements TwoDSpaces {
     }
 
 
-    public Block getXY(int x, int y) {
-        return field[x][y];
+    //Gets a block at the specified X Y position
+    public Block getAtXY(int x, int y) {
+
+
     }
 
     // Where should collision checking be done?
