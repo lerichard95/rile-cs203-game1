@@ -1,22 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3478f4f8-980c-4df6-9daa-8fe4a0734e2f" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/Block.class" afterPath="$PROJECT_DIR$/bin/Block.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/ColumnsWorld.class" afterPath="$PROJECT_DIR$/bin/ColumnsWorld.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/Main.class" afterPath="$PROJECT_DIR$/bin/Main.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/PlayField.class" afterPath="$PROJECT_DIR$/bin/PlayField.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/Tester.class" afterPath="$PROJECT_DIR$/bin/Tester.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/TwoDSpaces.class" afterPath="$PROJECT_DIR$/bin/TwoDSpaces.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Block.java" afterPath="$PROJECT_DIR$/src/Block.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/BlockType.java" afterPath="$PROJECT_DIR$/src/BlockType.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ColumnsWorld.java" afterPath="$PROJECT_DIR$/src/ColumnsWorld.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Main.java" afterPath="$PROJECT_DIR$/src/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/PlayField.java" afterPath="$PROJECT_DIR$/src/PlayField.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Tester.java" afterPath="$PROJECT_DIR$/src/Tester.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/TwoDSpaces.java" afterPath="$PROJECT_DIR$/src/TwoDSpaces.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="3478f4f8-980c-4df6-9daa-8fe4a0734e2f" name="Default" comment="" />
     <ignored path="rile-cs203-game1.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/bin/" />
@@ -108,8 +93,8 @@
       <file leaf-file-name="PlayField.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/PlayField.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.4488189" vertical-offset="627" max-vertical-offset="1235">
-              <caret line="49" column="20" selection-start-line="49" selection-start-column="20" selection-end-line="49" selection-end-column="20" />
+            <state vertical-scroll-proportion="0.5610236" vertical-offset="627" max-vertical-offset="1235">
+              <caret line="52" column="51" selection-start-line="52" selection-start-column="51" selection-end-line="52" selection-end-column="51" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -567,7 +552,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16074313" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21145375" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21145375" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -1161,8 +1146,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/PlayField.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4488189" vertical-offset="627" max-vertical-offset="1235">
-          <caret line="49" column="20" selection-start-line="49" selection-start-column="20" selection-end-line="49" selection-end-column="20" />
+        <state vertical-scroll-proportion="0.5610236" vertical-offset="627" max-vertical-offset="1235">
+          <caret line="52" column="51" selection-start-line="52" selection-start-column="51" selection-end-line="52" selection-end-column="51" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
