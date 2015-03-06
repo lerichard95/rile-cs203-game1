@@ -11,7 +11,7 @@ public class ColumnsWorld extends javalib.funworld.World {
 
     Block testBlock;
 
-    PlayField playField = new PlayField(8, 12);
+    PlayField playField;
 
     int score = 0;
     boolean winState = false;
@@ -22,7 +22,8 @@ public class ColumnsWorld extends javalib.funworld.World {
     /* Constructor */
     public ColumnsWorld() {
         super();
-
+        System.out.println("init Playfield from CW");
+        this.playField = new PlayField(8, 12);
     }
 
 

@@ -10,9 +10,10 @@ public class PlayerPiece {
 
     //  Takes in an x so that PlayField knows what x will be and can compare
     public PlayerPiece(int xx) {
+        this.player = new ArrayList<Block>();
         for (int y = 0; y <= 3; y++) {
             // use the constructor for a random BlockType
-            player.add(new Block(new Posn(xx, y * ColumnsWorld.BLOCK_SIZE)));
+            this.player.add(new Block(new Posn(xx, y * ColumnsWorld.BLOCK_SIZE)));
         }
     }
 

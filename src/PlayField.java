@@ -28,13 +28,17 @@ public class PlayField implements TwoDSpaces {
         this.height = h;
         field = new ArrayList<Block>(w * h);
 
+        System.out.println("init Playfield inside PF");
+
         //  For loop; fill the field with empty Blocks
         for (int i = 0; i <= this.width(); i++) {
-            for (int j = 0; j <= this.height(); i++) {
+            for (int j = 0; j <= this.height(); j++) {
                 field.add(new Block(new Posn(i + ColumnsWorld.BLOCK_SIZE, j + ColumnsWorld.BLOCK_SIZE),
                         BlockType.EMT));
             }
         }
+
+        System.out.println("loop done");
 
         //  TODO: Make a new player piece on init
         //  Choose a random x for the PlayerPiece
@@ -89,8 +93,7 @@ public class PlayField implements TwoDSpaces {
     // Where should collision checking be done?
 
     public WorldImage draw() {
-        // TODO: Draw gridlines for background
-        // TODO: Research drawing a grid for the background
+        // TODO: Draw gridlines for background... why doesn't it work?? hmmm
         WorldImage imgGrid = new RectangleImage(
                 new Posn(0 + (ColumnsWorld.BLOCK_SIZE / 2), 0 + (ColumnsWorld.BLOCK_SIZE)),
                 ColumnsWorld.BLOCK_SIZE,

@@ -14,6 +14,7 @@ public class Main {
 
         System.out.println("starting game...");
         ColumnsWorld game = new ColumnsWorld();
+        System.out.println("big banging");
         game.bigBang(width, height, 1.0);
 
 
