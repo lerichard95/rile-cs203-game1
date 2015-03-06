@@ -9,13 +9,13 @@ public class Main {
 
         //This class is specifically for testing— it will run all the tests for the game
         Tester tests = new Tester();
-        System.out.println(tests.testsPassedHuh());
+        System.out.println("testsPassedHuh() -> " + tests.testsPassedHuh());
 
-        /*
-        System.out.println("Hello world!");
+
+        System.out.println("starting game...");
         ColumnsWorld game = new ColumnsWorld();
         game.bigBang(width, height, 1.0);
-    */
+
 
     }
 

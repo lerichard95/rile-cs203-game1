@@ -13,19 +13,23 @@ public class Tester {
         // Each test should be functional
         // outputs can be verified with code— fully automated testing without
         // relying on side-effects
-        System.out.println("PosnEquals returns " + PosnEquals() + " Should be true");
+        BlockPosnEquals();
 
         System.out.println("----------  TESTING COMPLETE!  ----------");
         return true;
     }
 
 
-    public boolean PosnEquals() {
-        Posn testPosn1 = new Posn(100, 100);
-        Posn testPosn2 = new Posn(100, 100);
-        return testPosn1.equals(testPosn2);
+    public void BlockPosnEquals() {
+        Block testBlock1 = new Block(new Posn(100, 100), BlockType.A);
+        Block testBlock2 = new Block(new Posn(100, 100), BlockType.A);
+        System.out.println("Should be true || " + "BlockPosnEquals -> " + testBlock1.equals(testBlock1));
 
+        Block testBlock3 = new Block(new Posn(100, 100), BlockType.A);
+        Block testBlock4 = new Block(new Posn(100, 100), BlockType.B);
+        System.out.println("Should be false || " + "BlockPosnEquals -> " + testBlock3.equals(testBlock4));
 
     }
+
 
 }

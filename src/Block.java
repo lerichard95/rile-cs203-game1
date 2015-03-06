@@ -4,8 +4,11 @@ import javalib.worldimages.WorldImage;
 import javalib.colors.*;
 
 import java.awt.*;
+import java.util.Random;
 
 public class Block {
+    Random rand = new Random();
+
     int h = ColumnsWorld.BLOCK_SIZE;
     int w = ColumnsWorld.BLOCK_SIZE;
 
@@ -14,8 +17,17 @@ public class Block {
     protected BlockType type = BlockType.EMT;
 
     public Block(Posn pp, BlockType tt) {
-        posn = pp;
+        this.posn = pp;
         this.type = tt;
+    }
+
+    // TODO: This constructor is used to generate a new PlayerBlock
+    public Block(Posn pp) {
+        this.posn = pp;
+
+        // TODO: Randomly generate a type
+        int ran = rand.nextInt(BlockType.values().length);
+        this.type = BlockType.values()[ran];
     }
 
     /*
@@ -30,7 +42,6 @@ public class Block {
     * Returns the Posn of this block
     * @return The Posn of the block
      */
-
     public Posn posn() {
         return this.posn;
     }
@@ -46,15 +57,6 @@ public class Block {
     }
 
     /*
-    * Returns a boolean if Block b has the same BlockType as this block.
-    * @param b A Block to compare to
-    * @return A boolean if b has same BlockType as this
-     */
-    public boolean isSameType(Block b) {
-        return (this.type == b.type());
-    }
-
-    /*
     * Returns a boolean if this block is empty
     * @return A boolean
     */
@@ -65,7 +67,11 @@ public class Block {
 
     public WorldImage draw() {
         //Return a RectangleImage representing the rectangle
-        return new RectangleImage(this.posn, this.h, this.w, Color.blue);
+        // TODO: Switch statement, decide what color the block should be drawn
+        return new RectangleImage(
+                new Posn(this.posn.x + (ColumnsWorld.BLOCK_SIZE / 2),
+                        this.posn.y + (ColumnsWorld.BLOCK_SIZE) / 2)
+                , this.h, this.w, Color.blue);
     }
 
     /*
@@ -73,9 +79,27 @@ public class Block {
     * @return Returns true if this has the same properties as bb
      */
     public boolean equals(Block bb) {
-        return ((this.posn().equals(bb.posn())) &&
+        return ((this.posn().x == bb.posn().x)
+                && (this.posn().y == bb.posn().y) &&
                 (this.isSameType(bb))
         );
     }
 
+    /*
+    * Returns a boolean if Block b has the same BlockType as this block.
+    * @param b A Block to compare to
+    * @return A boolean if b has same BlockType as this
+     */
+    public boolean isSameType(Block b) {
+        return (this.type == b.type());
+    }
+
+    /*
+    * Returns a boolean true if this block has same Posn values as pp
+    * @return Returns true if this has the same Posn values as pp
+     */
+    public boolean isSamePosn(Posn pp) {
+        return ((this.posn().x == pp.x)
+                && (this.posn().y == pp.y));
+    }
 }

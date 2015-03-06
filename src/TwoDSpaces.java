@@ -12,7 +12,8 @@ public interface TwoDSpaces {
 	// TwoDSpaces is used to represent sets of blocks stored
 	// in a 2D matrix.
 
-	
+
+    // TODO: Does it matter what the params are for an interface?? Can I just leave params blank?
 	// Retrieve the block at a current XY
 	public Block getAtXY(Posn p);
 
