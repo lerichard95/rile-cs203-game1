@@ -68,9 +68,11 @@ public class Block {
     public WorldImage draw() {
         //Return a RectangleImage representing the rectangle
         // TODO: Switch statement, decide what color the block should be drawn
+        Posn pos = new Posn(this.posn.x + (ColumnsWorld.BLOCK_SIZE / 2),
+                this.posn.y + (ColumnsWorld.BLOCK_SIZE) / 2);
+        System.out.println("Block draw() pos: " + pos.x + ", " + pos.y);
         return new RectangleImage(
-                new Posn(this.posn.x + (ColumnsWorld.BLOCK_SIZE / 2),
-                        this.posn.y + (ColumnsWorld.BLOCK_SIZE) / 2)
+                pos
                 , this.h, this.w, Color.blue);
     }
 

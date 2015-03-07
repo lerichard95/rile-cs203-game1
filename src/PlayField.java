@@ -93,7 +93,9 @@ public class PlayField implements TwoDSpaces {
     // Where should collision checking be done?
 
     public WorldImage draw() {
-        // TODO: Draw gridlines for background... why doesn't it work?? hmmm
+        // TODO: Draw gridlines for background... It doesn't work!! Why??
+
+        //  Initial grid rectangle
         WorldImage imgGrid = new RectangleImage(
                 new Posn(0 + (ColumnsWorld.BLOCK_SIZE / 2), 0 + (ColumnsWorld.BLOCK_SIZE)),
                 ColumnsWorld.BLOCK_SIZE,
@@ -101,10 +103,12 @@ public class PlayField implements TwoDSpaces {
                 new Blue()
         );
 
+        //  Draw the rest of the grid
         for (int xx = 1; xx >= this.width(); xx++) {
             for (int yy = 1; yy >= this.height(); yy++) {
+                Posn newPos = new Posn(xx + (ColumnsWorld.BLOCK_SIZE / 2), yy + (ColumnsWorld.BLOCK_SIZE));
                 WorldImage imgGPiece = new RectangleImage(
-                        new Posn(xx + (ColumnsWorld.BLOCK_SIZE / 2), yy + (ColumnsWorld.BLOCK_SIZE)),
+                        newPos,
                         ColumnsWorld.BLOCK_SIZE,
                         ColumnsWorld.BLOCK_SIZE,
                         new Blue());
@@ -112,18 +116,18 @@ public class PlayField implements TwoDSpaces {
             }
         }
 
-        WorldImage imgBlocks;
-        // Put the first block there
-        imgBlocks = field.get(0).draw();
-        //  Overlay images of all on top of each other?
-        for (Block b : this.field) {
-            WorldImage imgB;
-            imgB = b.draw();
-            imgBlocks = new OverlayImages(imgGrid, imgB);
+        //  Draw the first block
+        WorldImage imgBlocks = field.get(0).draw();
+
+        //  Overlay rectangles for all blocks
+        for (Block bb : this.field) {
+            //WorldImage imgB;
+            //imgB = b.draw();
+            imgBlocks = new OverlayImages(imgGrid, bb.draw());
         }
 
-        WorldImage imgFinal;
-        imgFinal = new OverlayImages(imgGrid, imgBlocks);
+        //  Overlay the blocks onto the grid
+        WorldImage imgFinal = new OverlayImages(imgGrid, imgBlocks);
         return imgFinal;
     }
 }

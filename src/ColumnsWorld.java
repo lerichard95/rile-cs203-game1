@@ -7,7 +7,9 @@ import javalib.worldcanvas.*;
 
 public class ColumnsWorld extends javalib.funworld.World {
 
-    static final int BLOCK_SIZE = 20;
+    static final int BLOCK_SIZE = 40;
+    static final int PLAY_ROWS = 7;
+    static final int PLAY_COLUMNS= 10;
 
     Block testBlock;
 
@@ -23,7 +25,7 @@ public class ColumnsWorld extends javalib.funworld.World {
     public ColumnsWorld() {
         super();
         System.out.println("init Playfield from CW");
-        this.playField = new PlayField(8, 12);
+        this.playField = new PlayField(PLAY_ROWS, PLAY_COLUMNS);
     }
 
 
