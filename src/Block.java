@@ -12,7 +12,7 @@ public class Block {
     int h = ColumnsWorld.BLOCK_SIZE;
     int w = ColumnsWorld.BLOCK_SIZE;
 
-    // Posn
+    //  TODO: Normal Posn and NOT a pinhole?
     Posn posn;
     protected BlockType type = BlockType.EMT;
 
@@ -68,12 +68,19 @@ public class Block {
     public WorldImage draw() {
         //Return a RectangleImage representing the rectangle
         // TODO: Switch statement, decide what color the block should be drawn
-        Posn pos = new Posn(this.posn.x + (ColumnsWorld.BLOCK_SIZE / 2),
-                this.posn.y + (ColumnsWorld.BLOCK_SIZE) / 2);
-        System.out.println("Block draw() pos: " + pos.x + ", " + pos.y);
+
+
+        // TODO: Should this be adding or multiplying?
+        Posn pos = new Posn(
+                this.posn.x * (ColumnsWorld.BLOCK_SIZE / 2),
+                this.posn.y * (ColumnsWorld.BLOCK_SIZE / 2)
+        );
+        // TODO: System.out.println("Block draw() pos: " + pos.x + ", " + pos.y);
+
+        //  TODO: Yellow is stuff drawn with Block
         return new RectangleImage(
                 pos
-                , this.h, this.w, Color.blue);
+                , this.h, this.w, Color.YELLOW);
     }
 
     /*

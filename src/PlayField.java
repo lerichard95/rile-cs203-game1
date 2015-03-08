@@ -4,6 +4,7 @@ import javalib.worldimages.Posn;
 import javalib.worldimages.RectangleImage;
 import javalib.worldimages.WorldImage;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -12,8 +13,8 @@ public class PlayField implements TwoDSpaces {
 
     // implementation of the playing field
     // An ArrayList of Blocks
-    int width;
-    int height;
+    int playAreaWidth;
+    int playAreaHeight;
     Random rand = new Random();
 
     ArrayList<Block> field;
@@ -23,35 +24,37 @@ public class PlayField implements TwoDSpaces {
     PlayerPiece playerPiece;
 
     public PlayField(int w, int h) {
-        // These should be SMALL numbers to be multiplied with the blocksize...
-        this.width = w;
-        this.height = h;
+        this.playAreaWidth = w;
+        this.playAreaHeight = h;
+
         field = new ArrayList<Block>(w * h);
 
-        System.out.println("init Playfield inside PF");
-
         //  For loop; fill the field with empty Blocks
-        for (int i = 0; i <= this.width(); i++) {
-            for (int j = 0; j <= this.height(); j++) {
-                field.add(new Block(new Posn(i + ColumnsWorld.BLOCK_SIZE, j + ColumnsWorld.BLOCK_SIZE),
-                        BlockType.EMT));
+        System.out.println("Filling field with EMT Blocks");
+        for (int i = 0; i <= this.playAreaWidth; i++) {
+            for (int j = 0; j <= this.playAreaHeight; j++) {
+                // TODO: Check the i and j values
+                System.out.println("i: " + i + ", j: " + j);
+                field.add(
+                        new Block(
+                                new Posn(i * ColumnsWorld.BLOCK_SIZE, j * ColumnsWorld.BLOCK_SIZE),
+                                BlockType.EMT));
             }
         }
 
-        System.out.println("loop done");
 
         //  TODO: Make a new player piece on init
         //  Choose a random x for the PlayerPiece
-        int playerInitX = rand.nextInt(this.width) * ColumnsWorld.BLOCK_SIZE;
+        int playerInitX = rand.nextInt(this.playAreaWidth) * ColumnsWorld.BLOCK_SIZE;
         this.playerPiece = new PlayerPiece(playerInitX);
     }
 
     public int width() {
-        return this.width;
+        return this.playAreaWidth;
     }
 
     public int height() {
-        return this.height;
+        return this.playAreaHeight;
     }
 
     public Block getAtXY(Posn pp) throws RuntimeException {
@@ -59,7 +62,6 @@ public class PlayField implements TwoDSpaces {
 
         //  Loop through all the blocks in the field
         for (Block b : field) {
-            //  TODO: Test if posn equals works correctly...
             if (b.isSamePosn(pp)) {
                 outB = b;
             }
@@ -95,39 +97,47 @@ public class PlayField implements TwoDSpaces {
     public WorldImage draw() {
         // TODO: Draw gridlines for background... It doesn't work!! Why??
 
+        /*
         //  Initial grid rectangle
-        WorldImage imgGrid = new RectangleImage(
-                new Posn(0 + (ColumnsWorld.BLOCK_SIZE / 2), 0 + (ColumnsWorld.BLOCK_SIZE)),
-                ColumnsWorld.BLOCK_SIZE,
-                ColumnsWorld.BLOCK_SIZE,
-                new Blue()
-        );
+        WorldImage imgGrid =
+                new RectangleImage(
+                        new Posn(ColumnsWorld.BLOCK_SIZE / 2, ColumnsWorld.BLOCK_SIZE / 2),
+                        ColumnsWorld.BLOCK_SIZE,
+                        ColumnsWorld.BLOCK_SIZE,
+                        new javalib.colors.Green()
+                );
 
         //  Draw the rest of the grid
         for (int xx = 1; xx >= this.width(); xx++) {
             for (int yy = 1; yy >= this.height(); yy++) {
-                Posn newPos = new Posn(xx + (ColumnsWorld.BLOCK_SIZE / 2), yy + (ColumnsWorld.BLOCK_SIZE));
+                //  Generating a "pinhole:" Pinhole is the "center" of the block.
+                Posn newPos = new Posn(xx + (ColumnsWorld.BLOCK_SIZE / 2), yy + (ColumnsWorld.BLOCK_SIZE / 2));
                 WorldImage imgGPiece = new RectangleImage(
                         newPos,
                         ColumnsWorld.BLOCK_SIZE,
                         ColumnsWorld.BLOCK_SIZE,
-                        new Blue());
+                        Color.BLACK);
                 imgGrid = new OverlayImages(imgGrid, imgGPiece);
             }
         }
+        System.out.println("Finished drawing grid");
+
+    */
 
         //  Draw the first block
         WorldImage imgBlocks = field.get(0).draw();
+        System.out.println("Finished drawing first block");
 
         //  Overlay rectangles for all blocks
         for (Block bb : this.field) {
-            //WorldImage imgB;
-            //imgB = b.draw();
-            imgBlocks = new OverlayImages(imgGrid, bb.draw());
+            // TODO: Why are the X/Y values so high? Shouldn't they be from 0 to playAreaWidth?
+            System.out.println("bb: " + bb.posn().x + "," + bb.posn().y + " TYPE: " + bb.type());
+            imgBlocks = new OverlayImages(imgBlocks, bb.draw());
         }
+        System.out.println("Finished drawing all blocks");
 
         //  Overlay the blocks onto the grid
-        WorldImage imgFinal = new OverlayImages(imgGrid, imgBlocks);
-        return imgFinal;
+
+        return new OverlayImages(imgBlocks, imgBlocks);
     }
 }
