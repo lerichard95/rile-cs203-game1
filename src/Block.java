@@ -78,7 +78,7 @@ public class Block {
         return new RectangleImage(
                 //  TODO: Turn posnPixel into Pinhole...
                 new Pinhole(posnPixel)
-                , this.h, this.w, Color.YELLOW);
+                , this.h, this.w, Color.GREEN);
     }
 
     /*

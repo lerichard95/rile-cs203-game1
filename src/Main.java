@@ -1,12 +1,13 @@
 import java.util.Random;
 
+// TODO: All functions should be pure functional— return a new instance of itself...
+
+
 public class Main {
     //This is the main class
     static int WINDOW_HEIGHT = 1000;
     static int WINDOW_WIDTH = 1000;
     static Random rand = new Random();
-
-    /* Main method */
 
     public static void main(String[] args) {
 

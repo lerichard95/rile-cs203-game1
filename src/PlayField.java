@@ -90,8 +90,6 @@ public class PlayField implements TwoDSpaces {
 
     // TODO: Gravity- move player down one
 
-    // Where should collision checking be done?
-
     public WorldImage draw() {
         // TODO: Draw gridlines for background... It doesn't work!! Why??
 
@@ -129,14 +127,14 @@ public class PlayField implements TwoDSpaces {
         //  Overlay rectangles for all blocks
         for (Block bb : this.field) {
             WorldImage imgBlock = initBlock;
-            // TODO: Why are the X/Y values so high? Shouldn't they be from 0 to playAreaWidth?
             System.out.println("bb: " + bb.posn().x + "," + bb.posn().y + " TYPE: " + bb.type());
             initBlock = new OverlayImages(imgBlock, bb.draw());
         }
         System.out.println("Finished drawing all blocks");
 
         //  Overlay the blocks onto the grid
-
+        //  TODO: Why doesn't OverlayImages draw anything but the first image?
+        //
         return initBlock;
     }
 }

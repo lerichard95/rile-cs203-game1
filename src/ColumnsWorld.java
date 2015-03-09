@@ -1,6 +1,3 @@
-//  G1 represents the current state of world... Maybe it should extend
-//  javalib.funworld.World???
-
 import javalib.funworld.*;
 import javalib.worldimages.*;
 import javalib.worldcanvas.*;
@@ -64,16 +61,17 @@ public class ColumnsWorld extends javalib.funworld.World {
         *   If quickdrop key is pressed, instantly drop the PlayerPiece
         *   EXTRA: If rotation keys are pressed, rotate the PlayerPiece
         */
+    /*public World onKeyEvent(String ke) {
 
+    }
 
+*/
     //  WorldEnd worldEnds()
         /*
         * Override this method for the conditions to check for failure
         * - Check for collision (failure)
          */
 
-
-    //Need to research this
     public WorldImage makeImage() {
         // TODO: Draw all the state objects- playfield
         // Returns a picture of the game
