@@ -10,7 +10,7 @@ public class ColumnsWorld extends javalib.funworld.World {
 
     Block testBlock;
 
-    PlayField playField;
+    TwoDSpaces playField;
 
     int score = 0;
     boolean winState = false;
@@ -77,7 +77,7 @@ public class ColumnsWorld extends javalib.funworld.World {
         // Returns a picture of the game
         //this.testBlock = new Block(new javalib.worldimages.Posn(100, 100), BlockType.EMT);
         //return testBlock.draw();
-        return playField.draw();
+        return this.playField.draw();
     }
 
 }
