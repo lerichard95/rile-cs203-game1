@@ -4,29 +4,28 @@ import javalib.worldimages.WorldImage;
 import javalib.colors.*;
 
 import java.awt.*;
-import java.util.Random;
+
 
 public class Block {
-    Random rand = new Random();
 
     int h = ColumnsWorld.BLOCK_SIZE;
     int w = ColumnsWorld.BLOCK_SIZE;
 
-    //  TODO: Normal Posn and NOT a pinhole?
-    Posn posn;
+    //  TODO: this posn represents the index
+    Posn posnIndex;
     protected BlockType type = BlockType.EMT;
 
     public Block(Posn pp, BlockType tt) {
-        this.posn = pp;
+        this.posnIndex = pp;
         this.type = tt;
     }
 
-    // TODO: This constructor is used to generate a new PlayerBlock
-    public Block(Posn pp) {
-        this.posn = pp;
+    // TODO: This constructor is used to generate a new PlayerBlock at the posn
+    public Block(Posn ppi) {
+        this.posnIndex = ppi;
 
         // TODO: Randomly generate a type
-        int ran = rand.nextInt(BlockType.values().length);
+        int ran = Main.rand.nextInt(BlockType.values().length);
         this.type = BlockType.values()[ran];
     }
 
@@ -43,7 +42,7 @@ public class Block {
     * @return The Posn of the block
      */
     public Posn posn() {
-        return this.posn;
+        return this.posnIndex;
     }
 
     /*
@@ -69,17 +68,16 @@ public class Block {
         //Return a RectangleImage representing the rectangle
         // TODO: Switch statement, decide what color the block should be drawn
 
-
-        // TODO: Should this be adding or multiplying?
-        Posn pos = new Posn(
-                this.posn.x * (ColumnsWorld.BLOCK_SIZE / 2),
-                this.posn.y * (ColumnsWorld.BLOCK_SIZE / 2)
+        Posn posnPixel = new Posn(
+                this.posnIndex.x * ColumnsWorld.BLOCK_SIZE,
+                this.posnIndex.y * ColumnsWorld.BLOCK_SIZE
         );
         // TODO: System.out.println("Block draw() pos: " + pos.x + ", " + pos.y);
 
         //  TODO: Yellow is stuff drawn with Block
         return new RectangleImage(
-                pos
+                //  TODO: Turn posnPixel into Pinhole...
+                new Pinhole(posnPixel)
                 , this.h, this.w, Color.YELLOW);
     }
 
@@ -88,8 +86,8 @@ public class Block {
     * @return Returns true if this has the same properties as bb
      */
     public boolean equals(Block bb) {
-        return ((this.posn().x == bb.posn().x)
-                && (this.posn().y == bb.posn().y) &&
+        return ((this.posnIndex.x == bb.posnIndex.x)
+                && (this.posnIndex.y == bb.posnIndex.y) &&
                 (this.isSameType(bb))
         );
     }
@@ -108,7 +106,7 @@ public class Block {
     * @return Returns true if this has the same Posn values as pp
      */
     public boolean isSamePosn(Posn pp) {
-        return ((this.posn().x == pp.x)
-                && (this.posn().y == pp.y));
+        return ((this.posnIndex.x == pp.x)
+                && (this.posnIndex.y == pp.y));
     }
 }

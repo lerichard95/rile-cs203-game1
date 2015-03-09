@@ -6,7 +6,6 @@ import javalib.worldimages.WorldImage;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Random;
 
 public class PlayField implements TwoDSpaces {
     // Rectangular
@@ -15,7 +14,6 @@ public class PlayField implements TwoDSpaces {
     // An ArrayList of Blocks
     int playAreaWidth;
     int playAreaHeight;
-    Random rand = new Random();
 
     ArrayList<Block> field;
 
@@ -45,7 +43,7 @@ public class PlayField implements TwoDSpaces {
 
         //  TODO: Make a new player piece on init
         //  Choose a random x for the PlayerPiece
-        int playerInitX = rand.nextInt(this.playAreaWidth) * ColumnsWorld.BLOCK_SIZE;
+        int playerInitX = Main.rand.nextInt(this.playAreaWidth) * ColumnsWorld.BLOCK_SIZE;
         this.playerPiece = new PlayerPiece(playerInitX);
     }
 
@@ -125,19 +123,20 @@ public class PlayField implements TwoDSpaces {
     */
 
         //  Draw the first block
-        WorldImage imgBlocks = field.get(0).draw();
+        WorldImage initBlock = field.get(0).draw();
         System.out.println("Finished drawing first block");
 
         //  Overlay rectangles for all blocks
         for (Block bb : this.field) {
+            WorldImage imgBlock = initBlock;
             // TODO: Why are the X/Y values so high? Shouldn't they be from 0 to playAreaWidth?
             System.out.println("bb: " + bb.posn().x + "," + bb.posn().y + " TYPE: " + bb.type());
-            imgBlocks = new OverlayImages(imgBlocks, bb.draw());
+            initBlock = new OverlayImages(imgBlock, bb.draw());
         }
         System.out.println("Finished drawing all blocks");
 
         //  Overlay the blocks onto the grid
 
-        return new OverlayImages(imgBlocks, imgBlocks);
+        return initBlock;
     }
 }

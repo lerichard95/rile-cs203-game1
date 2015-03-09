@@ -3,7 +3,6 @@ import javalib.worldimages.Posn;
 public class Tester {
     // This class will be used to generate and run tests.
     public Tester() {
-
     }
 
     //  This method will run the tests
@@ -15,12 +14,21 @@ public class Tester {
         // relying on side-effects
         BlockPosnEquals();
 
+
+        Posn posn1 = new Posn(10, 10);
+        Pinhole pinHole1 = new Pinhole( posn1 );
+
+        System.out.println(pinHole1);
+
+
         System.out.println("----------  TESTING COMPLETE!  ----------");
         return true;
     }
 
 
+
     public void BlockPosnEquals() {
+
         Block testBlock1 = new Block(new Posn(100, 100), BlockType.A);
         Block testBlock2 = new Block(new Posn(100, 100), BlockType.A);
         System.out.println("Should be true || " + "BlockPosnEquals -> " + testBlock1.equals(testBlock1));

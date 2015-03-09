@@ -9,7 +9,7 @@ public class ColumnsWorld extends javalib.funworld.World {
 
     static final int BLOCK_SIZE = 40;
     static final int PLAY_ROWS = 7;
-    static final int PLAY_COLUMNS= 10;
+    static final int PLAY_COLUMNS = 10;
 
     Block testBlock;
 
@@ -21,22 +21,42 @@ public class ColumnsWorld extends javalib.funworld.World {
     //  Holds the state consisting of the playfield and the player piece
     //  TODO: Should the player piece be inside of the PlayField?
 
-    /* Constructor */
+    //  Initial constructor
     public ColumnsWorld() {
         super();
-        System.out.println("init Playfield from CW");
+
+        System.out.println("Init ColumnsWorld created");
         this.playField = new PlayField(PLAY_ROWS, PLAY_COLUMNS);
+        // - FIRST TIME: Spawn a PlayerPiece for the player to control
+    }
+
+    //  Constructor used for changing states
+    public ColumnsWorld(PlayField pf, int sc, boolean wS) {
+        super();
+        //  Update pieces of state
+        this.score = sc;
+        this.playField = pf;
+        this.winState = wS;
+        this.playField = pf;
+
+        System.out.println("Updated columnsWorld state");
     }
 
 
-    // World on-tick()
-    // What should happen when the game starts???
-    // - FIRST TIME: Spawn a PlayerPiece for the player to control
-    // - Advance block down once for gravity
-    // - Check for landing (when PlayerPiece is laid down)
-    // - Check for matches -> clear matches
+    // World onTick()
 
+    /*
+    public World onTick() {
+        //  TODO: onTick functions for PlayField should all return Worlds.
+        //  TODO: Advance the block down once for gravity
+        this.playField.gravityAdvance();
+        // TODO: Check for landing (when PlayerPiece is laid down)
+        this.playField.playerLanding();
+        // TODO: Check for matches -> clear matches, increment score...
+        this.playField.updateMatches();
 
+    }
+    */
 
     //  World on-key()
         /*  If direction keys are pressed, check for collision— if a move does not collide, move a the correct direction
@@ -45,14 +65,12 @@ public class ColumnsWorld extends javalib.funworld.World {
         *   EXTRA: If rotation keys are pressed, rotate the PlayerPiece
         */
 
+
     //  WorldEnd worldEnds()
         /*
         * Override this method for the conditions to check for failure
         * - Check for collision (failure)
          */
-
-
-
 
 
     //Need to research this

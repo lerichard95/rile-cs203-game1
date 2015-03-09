@@ -1,7 +1,10 @@
+import java.util.Random;
+
 public class Main {
     //This is the main class
     static int WINDOW_HEIGHT = 1000;
     static int WINDOW_WIDTH = 1000;
+    static Random rand = new Random();
 
     /* Main method */
 
