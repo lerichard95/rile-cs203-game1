@@ -15,6 +15,8 @@ public class PlayerPiece {
     int indexY = 0;
 
     //  Takes in an x so that PlayField knows what x will be and can compare
+
+
     public PlayerPiece(int xx) {
         this.indexX = xx;
         this.indexY = 0;
@@ -34,7 +36,8 @@ public class PlayerPiece {
     }
 
     // TODO: cycle the order of the blocks upwards one
-    /*
+
+        /*
     public PlayerPiece cycleUp(){
     subtract one and modulo something...
     }
@@ -49,6 +52,7 @@ public class PlayerPiece {
      */
 
     // TODO: Draw the playerPiece
+
     public WorldImage draw() {
         WorldImage img = player.get(0).draw();
         for (Block bb : player) { img = new OverlayImages(img, bb.draw()); }

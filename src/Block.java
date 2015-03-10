@@ -11,7 +11,6 @@ public class Block {
     int h = ColumnsWorld.BLOCK_SIZE;
     int w = ColumnsWorld.BLOCK_SIZE;
 
-    //  TODO: this posn represents the index
     Posn posnIndex;
     protected BlockType type = BlockType.EMT;
 
@@ -25,7 +24,7 @@ public class Block {
     public Block(Posn ppi) {
         this.posnIndex = ppi;
 
-        // TODO: Randomly generate a type
+        // Randomly generate a type for the new Block
         int ran = Main.rand.nextInt(BlockType.values().length);
         this.type = BlockType.values()[ran];
     }
