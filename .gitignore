@@ -1,6 +1,7 @@
 *.xml
 .idea
-/bin/*.class
+*.class
+bin/*.class
 
 # OS generated files #
 ######################
