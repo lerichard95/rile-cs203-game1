@@ -1,11 +1,10 @@
+import tester.*;
 import javalib.worldimages.Posn;
 
-public class Tester {
 
-    public Tester() {
-    }
-    //  This method will run the tests
-    public boolean testsPassedHuh() {
+public class columnsExamples {
+
+    public boolean testsP() {
         // TODO: Devise tests, write tests...
         // This function will return false if the tests fail
         // Each test should be functional

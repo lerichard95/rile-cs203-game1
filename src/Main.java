@@ -1,5 +1,5 @@
 import java.util.Random;
-
+import tester.*;
 // TODO: All functions should be pure functional— return a new instance of itself...
 
 
@@ -12,8 +12,8 @@ public class Main {
     public static void main(String[] args) {
 
         //This class is specifically for testing— it will run all the tests for the game
-        Tester tests = new Tester();
-        System.out.println("testsPassedHuh() -> " + tests.testsPassedHuh());
+        columnsExamples columnsExamples = new columnsExamples();
+        Tester.run(columnsExamples);
 
         System.out.println("starting game...");
         ColumnsWorld game = new ColumnsWorld();
