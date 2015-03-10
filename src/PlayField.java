@@ -11,6 +11,7 @@ public class PlayField implements TwoDSpaces {
 
     int playAreaWidth = ColumnsWorld.PLAY_COLUMNS;
     int playAreaHeight = ColumnsWorld.PLAY_ROWS;
+    public int score = 0;
 
     ArrayList<Block> field;
 
@@ -41,6 +42,12 @@ public class PlayField implements TwoDSpaces {
         //  Choose a random x for the PlayerPiece
         int playerInitX = Main.rand.nextInt(this.playAreaWidth) * ColumnsWorld.BLOCK_SIZE;
         this.playerPiece = new PlayerPiece(playerInitX);
+    }
+
+    // Constructor for updating state
+    public PlayField(ArrayList<Block> ff, int sc) {
+        this.field = ff;
+        this.score = sc;
     }
 
     public int width() {
@@ -125,11 +132,9 @@ public class PlayField implements TwoDSpaces {
             System.out.println("bb: " + bb.posn().x + "," + bb.posn().y + " TYPE: " + bb.type());
             blockk = new OverlayImages(blockk, bb.draw());
         }
+
         System.out.println("Finished drawing all blocks");
 
-        //  Overlay the blocks onto the grid
-        //  TODO: Why doesn't OverlayImages draw anything but the first image?
-        //
         return blockk;
     }
 }

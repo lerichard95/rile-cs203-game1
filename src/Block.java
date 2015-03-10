@@ -15,6 +15,7 @@ public class Block {
     Posn posnIndex;
     protected BlockType type = BlockType.EMT;
 
+    //  Constructor for updating Block state
     public Block(Posn pp, BlockType tt) {
         this.posnIndex = pp;
         this.type = tt;
@@ -28,6 +29,8 @@ public class Block {
         int ran = Main.rand.nextInt(BlockType.values().length);
         this.type = BlockType.values()[ran];
     }
+
+
 
     /*
     * Returns the BlockType of this block

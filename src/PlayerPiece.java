@@ -28,6 +28,11 @@ public class PlayerPiece {
         }
     }
 
+    //  Constructor for updating state
+    public PlayerPiece(ArrayList<Block> pp) {
+        this.player = pp;
+    }
+
     // TODO: cycle the order of the blocks upwards one
     /*
     public PlayerPiece cycleUp(){
