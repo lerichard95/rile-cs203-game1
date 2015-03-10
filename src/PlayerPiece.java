@@ -16,7 +16,6 @@ public class PlayerPiece {
 
     //  Takes in an x so that PlayField knows what x will be and can compare
 
-
     public PlayerPiece(int xx) {
         this.indexX = xx;
         this.indexY = 0;

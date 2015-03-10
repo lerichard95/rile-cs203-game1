@@ -24,11 +24,12 @@ public class PlayField implements TwoDSpaces {
 
 
         //  For loop; fill the field with empty Blocks
+
         System.out.println("Filling field with EMT Blocks");
         for (int ix = 0; ix <= this.playAreaWidth; ix++) {
             for (int iy = 0; iy <= this.playAreaHeight; iy++) {
                 // TODO: Check the i and j values
-                System.out.println("ix: " + ix + ", iy: " + iy);
+                //System.out.println("ix: " + ix + ", iy: " + iy);
                 field.add(
                         new Block(
                                 // TODO: All uses of Block constructor need to pass an index
@@ -142,7 +143,7 @@ public class PlayField implements TwoDSpaces {
         WorldImage imageBlocks = imageBlockInit;
         //  Overlay rectangles for all blocks
         for (Block bb : this.field) {
-            System.out.println("bb: " + bb.posn().x + "," + bb.posn().y + " TYPE: " + bb.type());
+            // System.out.println("bb: " + bb.posn().x + "," + bb.posn().y + " TYPE: " + bb.type());
             imageBlocks = new OverlayImages(imageBlocks, bb.draw());
         }
 

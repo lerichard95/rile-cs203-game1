@@ -4,7 +4,7 @@
 
 
 #TEST CHECKLIST
-Functions to run tests on…
+Functions to run tests on
 ##Block
 clear()
 equals()
