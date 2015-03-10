@@ -8,34 +8,30 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class PlayField implements TwoDSpaces {
-    // Rectangular
 
-    // implementation of the playing field
-    // An ArrayList of Blocks
-    int playAreaWidth;
-    int playAreaHeight;
+    int playAreaWidth = ColumnsWorld.PLAY_COLUMNS;
+    int playAreaHeight = ColumnsWorld.PLAY_ROWS;
 
     ArrayList<Block> field;
 
-    // TODO: player holds the "PlayerPiece"
-    // Movement done in PlayField
     PlayerPiece playerPiece;
 
-    public PlayField(int w, int h) {
-        this.playAreaWidth = w;
-        this.playAreaHeight = h;
+    public PlayField() {
+        field = new ArrayList<Block>(
+                ((playAreaWidth * playAreaHeight) - 1)
+        );
 
-        field = new ArrayList<Block>(w * h);
 
         //  For loop; fill the field with empty Blocks
         System.out.println("Filling field with EMT Blocks");
-        for (int i = 0; i <= this.playAreaWidth; i++) {
-            for (int j = 0; j <= this.playAreaHeight; j++) {
+        for (int ix = 0; ix <= this.playAreaWidth; ix++) {
+            for (int iy = 0; iy <= this.playAreaHeight; iy++) {
                 // TODO: Check the i and j values
-                System.out.println("i: " + i + ", j: " + j);
+                System.out.println("ix: " + ix + ", iy: " + iy);
                 field.add(
                         new Block(
-                                new Posn(i * ColumnsWorld.BLOCK_SIZE, j * ColumnsWorld.BLOCK_SIZE),
+                                // TODO: All uses of Block constructor need to pass an index
+                                new Posn(ix, iy),
                                 BlockType.EMT));
             }
         }
@@ -74,7 +70,7 @@ public class PlayField implements TwoDSpaces {
     }
 
     public PlayField empty(int width, int height) {
-        return new PlayField(width, height);
+        return new PlayField();
     }
 
     // TODO: Check for playerPiece + field matches
@@ -122,19 +118,18 @@ public class PlayField implements TwoDSpaces {
 
         //  Draw the first block
         WorldImage initBlock = field.get(0).draw();
-        System.out.println("Finished drawing first block");
 
+        WorldImage blockk = initBlock;
         //  Overlay rectangles for all blocks
         for (Block bb : this.field) {
-            WorldImage imgBlock = initBlock;
             System.out.println("bb: " + bb.posn().x + "," + bb.posn().y + " TYPE: " + bb.type());
-            initBlock = new OverlayImages(imgBlock, bb.draw());
+            blockk = new OverlayImages(blockk, bb.draw());
         }
         System.out.println("Finished drawing all blocks");
 
         //  Overlay the blocks onto the grid
         //  TODO: Why doesn't OverlayImages draw anything but the first image?
         //
-        return initBlock;
+        return blockk;
     }
 }

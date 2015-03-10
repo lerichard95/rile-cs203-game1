@@ -1,4 +1,7 @@
+import javalib.worldimages.OverlayImages;
 import javalib.worldimages.Posn;
+import javalib.worldimages.RectangleImage;
+import javalib.worldimages.WorldImage;
 
 import java.util.ArrayList;
 
@@ -34,4 +37,15 @@ public class PlayerPiece {
 
     // TODO: Cycle the order of the blocks downwards one
 
+    // TODO: Draw the playerPiece
+    public WorldImage draw(){
+
+        //  TODO: Fix draw() - Why doesn't this draw??
+        WorldImage img = player.get(0).draw();
+        for (Block bb : player) {
+            img = new OverlayImages(img, bb.draw());
+        }
+
+        return img;
+    }
 }

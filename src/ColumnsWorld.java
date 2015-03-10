@@ -23,7 +23,7 @@ public class ColumnsWorld extends javalib.funworld.World {
         super();
 
         System.out.println("Init ColumnsWorld created");
-        this.playField = new PlayField(PLAY_ROWS, PLAY_COLUMNS);
+        this.playField = new PlayField();
         // - FIRST TIME: Spawn a PlayerPiece for the player to control
     }
 
@@ -34,7 +34,6 @@ public class ColumnsWorld extends javalib.funworld.World {
         this.score = sc;
         this.playField = pf;
         this.winState = wS;
-        this.playField = pf;
 
         System.out.println("Updated columnsWorld state");
     }
