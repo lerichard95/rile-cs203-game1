@@ -11,8 +11,6 @@ public class Main {
 
     public static void main(String[] args) {
 
-
-
         //This class is specifically for testing— it will run all the tests for the game
         Tester tests = new Tester();
         System.out.println("testsPassedHuh() -> " + tests.testsPassedHuh());

@@ -1,10 +1,9 @@
 import javalib.worldimages.Posn;
 
 public class Tester {
-    // This class will be used to generate and run tests.
+
     public Tester() {
     }
-
     //  This method will run the tests
     public boolean testsPassedHuh() {
         // TODO: Devise tests, write tests...
@@ -13,7 +12,6 @@ public class Tester {
         // outputs can be verified with code— fully automated testing without
         // relying on side-effects
         BlockPosnEquals();
-
 
         Posn posn1 = new Posn(10, 10);
         Pinhole pinHole1 = new Pinhole( posn1 );
@@ -24,8 +22,6 @@ public class Tester {
         System.out.println("----------  TESTING COMPLETE!  ----------");
         return true;
     }
-
-
 
     public void BlockPosnEquals() {
 

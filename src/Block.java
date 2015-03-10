@@ -75,11 +75,9 @@ public class Block {
                 this.posnIndex.x * ColumnsWorld.BLOCK_SIZE,
                 this.posnIndex.y * ColumnsWorld.BLOCK_SIZE
         );
-        // TODO: System.out.println("Block draw() pos: " + pos.x + ", " + pos.y);
 
-        //  TODO: Yellow is stuff drawn with Block
         return new RectangleImage(
-                //  TODO: Turn posnPixel into Pinhole...
+                //  TODO: Decide on colors for blocks
                 new Pinhole(posnPixel)
                 , this.h, this.w, Color.GREEN);
     }

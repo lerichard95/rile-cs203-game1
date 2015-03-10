@@ -5,8 +5,6 @@ pinhole, posn
 Pinhole is used solely for drawing— represents the center of a rectangle.
 posnPixel is used to keep the position— represents the top left pixeL.
     TO GET A POSNPIXEL: posnIndex * BLOCK_SIZE
-
-
 */
 
 public class Pinhole extends Posn {

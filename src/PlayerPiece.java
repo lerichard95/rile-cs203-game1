@@ -36,21 +36,22 @@ public class PlayerPiece {
     // TODO: cycle the order of the blocks upwards one
     /*
     public PlayerPiece cycleUp(){
-
+    subtract one and modulo something...
     }
     */
 
     // TODO: Cycle the order of the blocks downwards one
+    /*
+    public PlayerPiece cycleDown() {
+    add one and modulo something...
+    }
+
+     */
 
     // TODO: Draw the playerPiece
-    public WorldImage draw(){
-
-        //  TODO: Fix draw() - Why doesn't this draw??
+    public WorldImage draw() {
         WorldImage img = player.get(0).draw();
-        for (Block bb : player) {
-            img = new OverlayImages(img, bb.draw());
-        }
-
+        for (Block bb : player) { img = new OverlayImages(img, bb.draw()); }
         return img;
     }
 }

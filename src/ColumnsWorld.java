@@ -74,7 +74,7 @@ public class ColumnsWorld extends javalib.funworld.World {
     //  WorldEnd worldEnds()
         /*
         * Override this method for the conditions to check for failure
-        * - Check for collision (failure)
+        * - Check for overflow (failure)
          */
 
     public WorldImage makeImage() {
