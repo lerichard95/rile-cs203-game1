@@ -18,19 +18,15 @@ public class PlayField implements TwoDSpaces {
     PlayerPiece playerPiece;
 
     public PlayField() {
-        field = new ArrayList<Block>(
-                ((playAreaWidth * playAreaHeight) - 1)
-        );
-
-
+        this.field =
+                new ArrayList<Block>(((playAreaWidth * playAreaHeight) - 1));
         //  For loop; fill the field with empty Blocks
-
         System.out.println("Filling field with EMT Blocks");
         for (int ix = 0; ix <= this.playAreaWidth; ix++) {
             for (int iy = 0; iy <= this.playAreaHeight; iy++) {
                 // TODO: Check the i and j values
                 //System.out.println("ix: " + ix + ", iy: " + iy);
-                field.add(
+                this.field.add(
                         new Block(
                                 // TODO: All uses of Block constructor need to pass an index
                                 new Posn(ix, iy),
@@ -38,12 +34,12 @@ public class PlayField implements TwoDSpaces {
             }
         }
 
-
         //  TODO: Make a new player piece on init
         //  Choose a random x for the PlayerPiece
         int playerInitX = Main.rand.nextInt(this.playAreaWidth) * ColumnsWorld.BLOCK_SIZE;
         this.playerPiece = new PlayerPiece(playerInitX);
     }
+
 
     // Constructor for updating state
     public PlayField(ArrayList<Block> ff, int sc) {
@@ -88,6 +84,12 @@ public class PlayField implements TwoDSpaces {
     // remove the matched blocks with empty blocks, increment score by 1
     // Removed blocks— they will be handled by "gravity"
 
+    public PlayField updateMatches() {
+
+        return new PlayField();
+    }
+
+
     // TODO: Gravity- move player down one
     // Update Y indices of playerPiece by adding 1, if they do not cause illegal collision
 
@@ -105,7 +107,6 @@ public class PlayField implements TwoDSpaces {
     // TODO: Quickdrop player down
     // Calculate the nearest block in the same Y column from playField that is empty
     // Change the Y indices of PlayerPiece blocks such that the lowest Y index is the same as above
-
 
 
     public WorldImage draw() {
@@ -150,5 +151,16 @@ public class PlayField implements TwoDSpaces {
         System.out.println("Finished drawing all blocks");
 
         return imageBlocks;
+    }
+
+    @Override
+    public String toString() {
+        return "PlayField{" +
+                "playAreaWidth=" + playAreaWidth +
+                ", playAreaHeight=" + playAreaHeight +
+                ", score=" + score +
+                ", field=" + field +
+                ", playerPiece=" + playerPiece +
+                '}';
     }
 }

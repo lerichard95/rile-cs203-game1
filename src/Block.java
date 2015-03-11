@@ -109,4 +109,14 @@ public class Block {
         return ((this.posnIndex.x == pp.x)
                 && (this.posnIndex.y == pp.y));
     }
+
+    @Override
+    public String toString() {
+        return "Block{" +
+                "h=" + h +
+                ", w=" + w +
+                ", posnIndex=" + posnIndex +
+                ", type=" + type +
+                '}';
+    }
 }

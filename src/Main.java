@@ -1,7 +1,5 @@
 import java.util.Random;
 import tester.*;
-// TODO: All functions should be pure functional— return a new instance of itself...
-
 
 public class Main {
     //This is the main class
@@ -22,7 +20,7 @@ public class Main {
         WINDOW_HEIGHT = ColumnsWorld.PLAY_COLUMNS * ColumnsWorld.BLOCK_SIZE;
         WINDOW_WIDTH = ColumnsWorld.PLAY_ROWS * ColumnsWorld.BLOCK_SIZE;
 
-        System.out.println("big banging");
+        System.out.println("big bang starting");
         game.bigBang(WINDOW_WIDTH, WINDOW_HEIGHT, 1.0);
 
 

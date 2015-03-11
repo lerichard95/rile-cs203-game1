@@ -43,7 +43,7 @@ public class ColumnsWorld extends javalib.funworld.World {
 
     /*
     public World onTick() {
-        //  TODO: onTick functions for PlayField should all return Worlds.
+        //  TODO: onTick functions for PlayField should all return PlayField.
         //  So use ColumnsWorld constructor to build a new ColumnsWorld for each function?
         //  TODO: Perhaps playField should hold the score instead?
 

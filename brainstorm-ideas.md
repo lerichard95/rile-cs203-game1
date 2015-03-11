@@ -6,21 +6,28 @@
 #TEST CHECKLIST
 Functions to run tests on
 ##Block
-clear()
-equals()
-isEmpty()
-isSamePosn()
-isSameType()
+[] Block()
+Enums are hard to test??
+[x] clear() - exhaustive
+[~] equals() - exhaustive
+[x] isEmpty() - exhaustive
+[x] isSamePosn() - exhaustive
+[~] isSameType() - ??
 
 ##ColumnsWorld
+[] ColumnsWorld()
 
 ##PlayerPiece
-cycleUp()
-cycleDown()
+[] PlayerPiece
+[] cycleUp()
+[] cycleDown()
 
 ##PlayField
-getAtXY()
+[] PlayField
+[] getAtXY()
 
+#Pinhole
+[] Pinhole() 
 
 #Useful notes
 ==

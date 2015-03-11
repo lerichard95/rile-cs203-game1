@@ -8,20 +8,20 @@ posnPixel is used to keep the position— represents the top left pixeL.
 */
 
 public class Pinhole extends Posn {
-    int posnX;
-    int posnY;
+    int indX;
+    int indY;
 
-    //  Converts a Posn to a pinhole
+    //  Constructor converts a Posn to a pinhole
     public Pinhole(Posn pp) {
         super(pp.x + (ColumnsWorld.BLOCK_SIZE / 2),
                 pp.y + (ColumnsWorld.BLOCK_SIZE / 2));
-        this.posnX = pp.x;
-        this.posnY = pp.y;
+        this.indX = pp.x;
+        this.indY = pp.y;
     }
 
     public String toString(){
-        return "posnX: " + this.posnX + ", posnY: " +
-                this.posnY + ". this.x: " + this.x
+        return "indX: " + this.indX + ", indY: " +
+                this.indY + ". this.x: " + this.x
                 + ", this.y: " + this.y;
     }
 }

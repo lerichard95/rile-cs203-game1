@@ -57,4 +57,13 @@ public class PlayerPiece {
         for (Block bb : player) { img = new OverlayImages(img, bb.draw()); }
         return img;
     }
+
+    @Override
+    public String toString() {
+        return "PlayerPiece{" +
+                "player=" + player +
+                ", indexX=" + indexX +
+                ", indexY=" + indexY +
+                '}';
+    }
 }
