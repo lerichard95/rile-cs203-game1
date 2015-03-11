@@ -18,18 +18,21 @@ public class columnsExamples {
             }
 
             //  TODO: How do you set up tests to guarantee different values?
-            /*for (int p = 0; p < BlockType.values().length; p++) {
-                for (int j = 1; j < BlockType.values().length; j++) {
+            //  idea of implication... don't consider q if p isn't true
+            //  p -> q
+            for (int p = 0; p < BlockType.values().length; p++) {
+                for (int j = 0; j < BlockType.values().length; j++) {
                     Block testBlock3 = new Block(new Posn(i, i), BlockType.values()[p]);
-                    int sel = (p + j) % (BlockType.values().length - 1);
-                    Block testBlock4 = new Block(new Posn(i, i), BlockType.values()[sel]);
-                    t.checkExpect(
-                            testBlock3.equals(testBlock4),
-                            false,
-                            "testBlockEquals - Different BlockTypes"
-                    );
+                    Block testBlock4 = new Block(new Posn(i, i), BlockType.values()[j]);
+                    if (p != j) {
+                        t.checkExpect(
+                                testBlock3.equals(testBlock4),
+                                false,
+                                "testBlockEquals - Different BlockTypes"
+                        );
+                    }
                 }
-            }*/
+            }
 
         }
     }
@@ -77,6 +80,13 @@ public class columnsExamples {
 
     public void testBlockIsSameType(Tester t) {
         for (int p = 0; p < BlockType.values().length; p++) {
+            // TODO: Replace 0's with randoms, since posns don't matter
+            int a;
+            int b;
+            int c;
+            int d;
+
+
             Block testBlock1 = new Block(new Posn(0, 0), BlockType.values()[p]);
             Block testBlock2 = new Block(new Posn(0, 0), BlockType.values()[p]);
             t.checkExpect(

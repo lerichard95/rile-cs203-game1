@@ -45,15 +45,16 @@ public class ColumnsWorld extends javalib.funworld.World {
     public World onTick() {
         //  TODO: onTick functions for PlayField should all return PlayField.
         //  So use ColumnsWorld constructor to build a new ColumnsWorld for each function?
-        //  TODO: Perhaps playField should hold the score instead?
 
         //  TODO: Advance the block down once for gravity
         in/out function scheme is
         playField -> playField -> playField
         ex: ColumnsWorld( this.playField.gravityAdvance().playerLanding().updateMatches()??
         int sc, boolean wS );
+
         // TODO: Check for landing (when PlayerPiece is laid down)
         this.playField.playerLanding();
+
         // TODO: Check for matches -> clear matches, increment score...
         this.playField.updateMatches();
 
@@ -70,7 +71,8 @@ public class ColumnsWorld extends javalib.funworld.World {
 
     }
 
-*/
+    */
+
     //  WorldEnd worldEnds()
         /*
         * Override this method for the conditions to check for failure

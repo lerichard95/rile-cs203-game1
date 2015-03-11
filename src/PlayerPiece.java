@@ -50,8 +50,6 @@ public class PlayerPiece {
 
      */
 
-    // TODO: Draw the playerPiece
-
     public WorldImage draw() {
         WorldImage img = player.get(0).draw();
         for (Block bb : player) { img = new OverlayImages(img, bb.draw()); }

@@ -96,18 +96,36 @@ public class PlayField implements TwoDSpaces {
     // TODO: Check for playerPiece "landing"
     // When the playerPiece lands, remove all the Blocks from field that have same Posn as playerPiece
     // and replace with new Blocks with same Posn as the landed playerPiece
+    public PlayField playerLanding() {
+
+        return new PlayField();
+    }
 
     // TODO: Move player left
     // Update all X indices of PlayerPiece one by subtracting one, if they do not cause illegal collisions
+    public PlayerPiece movePlayerLeft() {
 
+        return new PlayerPiece(3);
+    }
 
     // TODO: Move player right
     // Update all X indices of PlayerPiece by adding one, if they do not cause illegal collisions
+    public PlayerPiece movePlayerRight() {
+
+        return new PlayerPiece(3);
+    }
 
     // TODO: Quickdrop player down
     // Calculate the nearest block in the same Y column from playField that is empty
     // Change the Y indices of PlayerPiece blocks such that the lowest Y index is the same as above
+    public PlayField quickDrop() {
+        return new PlayField();
+    }
 
+    // TODO: quickdrop helper - Find nearest Y block in same column
+    public Block findNearestY(int col){
+        return Block();
+    }
 
     public WorldImage draw() {
         // TODO: Draw gridlines for background
