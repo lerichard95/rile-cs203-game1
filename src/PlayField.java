@@ -60,6 +60,13 @@ public class PlayField implements TwoDSpaces {
         return PlayField.playAreaHeight;
     }
 
+    public PlayField replace(Block bb) {
+        ArrayList<Block> newField = this.field;
+        newField.remove(this.getAtXY(bb.posn()));
+        newField.add(bb);
+        return new PlayField(newField, this.playerPiece, this.score);
+    }
+
     public Block getAtXY(Posn pp) throws RuntimeException {
         Block outB = new Block(new Posn(-1, -1), BlockType.EMT);
 
@@ -129,8 +136,8 @@ public class PlayField implements TwoDSpaces {
     }
 
     // TODO: quickdrop helper - Find nearest Y block in same column
-    public Block findNearestY(int col){
-        return new Block(new Posn(0,0));
+    public Block findNearestY(int col) {
+        return new Block(new Posn(0, 0));
     }
 
     public WorldImage draw() {
