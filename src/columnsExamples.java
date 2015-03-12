@@ -223,43 +223,43 @@ public class columnsExamples {
 
 
     public void testPlayFieldRemove(Tester t) {
+        for (int o = 0 ; o <= 10 ; o++) {
+            // Must be constrained to indices that are actually used
+            int x = Main.rand.nextInt(PlayField.playAreaWidth);
+            int y = Main.rand.nextInt(PlayField.playAreaHeight);
+            Posn pos = new Posn(x, y);
 
-        // Must be constrained to indices that are actually used
-        int x = Main.rand.nextInt() % PlayField.playAreaWidth;
-        int y = Main.rand.nextInt() % PlayField.playAreaHeight;
-        Posn pos = new Posn(x, y);
+            // Only nonempty types
+            int tt = 1 + Main.rand.nextInt(BlockType.values().length - 1);
 
-        // Only nonempty types
-        int tt = 1 + Main.rand.nextInt(BlockType.values().length - 1);
+            Block somethingBlock = new Block(pos, BlockType.values()[tt]);
+            Block emptyBlock = new Block(pos, BlockType.EMT);
 
-        Block somethingBlock = new Block(pos, BlockType.values()[tt]);
-        Block emptyBlock = new Block(pos, BlockType.EMT);
+            PlayField pfInit = new PlayField();
 
-        PlayField pfInit = new PlayField();
-
-        //  Copy for comparison
-        PlayField pf1 = pfInit;
-        // Replace all empties with somethingBlocks
-        for (int ix = 0; ix <= PlayField.playAreaWidth; ix++) {
-            for (int iy = 0; iy <= PlayField.playAreaHeight; iy++) {
-                pf1 = pf1.replace(somethingBlock);
+            //  Copy for comparison
+            PlayField pf1 = pfInit;
+            // Replace all empties with somethingBlocks
+            for (int ix = 0; ix <= PlayField.playAreaWidth; ix++) {
+                for (int iy = 0; iy <= PlayField.playAreaHeight; iy++) {
+                    pf1 = pf1.replace(somethingBlock);
+                }
             }
-        }
 
-        PlayField pf2 = pf1;
-        // Replace all the somethingBlocks with empties
-        for (int ix = 0; ix <= PlayField.playAreaWidth; ix++) {
-            for (int iy = 0; iy <= PlayField.playAreaHeight; iy++) {
-                pf2 = pf2.replace(emptyBlock);
+            PlayField pf2 = pf1;
+            // Replace all the somethingBlocks with empties
+            for (int ix = 0; ix <= PlayField.playAreaWidth; ix++) {
+                for (int iy = 0; iy <= PlayField.playAreaHeight; iy++) {
+                    pf2 = pf2.replace(emptyBlock);
 
-                t.checkExpect(
-                        pf1.remove(somethingBlock),
-                        pf2,
-                        "testPlayFieldRemove - add somethings, remove somethings");
+                    t.checkExpect(
+                            pf1.remove(somethingBlock),
+                            pf2,
+                            "testPlayFieldRemove - add somethings, remove somethings");
+                }
             }
+
         }
-
-
     }
 
     /*

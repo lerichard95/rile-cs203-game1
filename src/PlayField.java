@@ -12,8 +12,8 @@ public class PlayField implements TwoDSpaces {
     // Since we are using indices for ArrayList, 0,0 is a valid X/Y.
     // Directions: Specify the columns and rows in ColumnsWorld,
     // and they will be converted here to their proper indices
-    public static final int playAreaWidth = ColumnsWorld.PLAY_COLUMNS - 1;
-    public static final int playAreaHeight = ColumnsWorld.PLAY_ROWS - 1;
+    public static final int playAreaWidth = (ColumnsWorld.PLAY_COLUMNS - 1);
+    public static final int playAreaHeight = (ColumnsWorld.PLAY_ROWS - 1);
     public int score = 0;
 
     ArrayList<Block> field;
@@ -75,18 +75,17 @@ public class PlayField implements TwoDSpaces {
 
     public Block getAtXY(Posn pp) throws RuntimeException {
         Block outB = new Block(new Posn(-1, -1), BlockType.EMT);
-
         //  Loop through all the blocks in the field
         for (Block b : field) {
             if (b.isSamePosn(pp)) {
                 outB = b;
             }
         }
-        //  Using a sentinel value : posn x, y can never be -1
 
+        //  Using a sentinel value : posn x, y can never be -1
         if (outB.equals(new Block(new Posn(-1, -1), BlockType.EMT))) {
             // TODO: Catch the RuntimeException in the caller of outB
-            throw new RuntimeException("ERROR: Block with Posn(x, y) not found");
+            throw new RuntimeException("ERROR: Block with Posn( " + pp.x + ", "+ pp.y + " ) not found");
         }
         return outB;
     }
