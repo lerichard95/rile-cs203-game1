@@ -2,7 +2,10 @@
 #Brainstorming
 
 ##CURRENT TASK:
-#Write test for playFieldUpdateMatches
+- Write test for playFieldUpdateMatches
+- Design test for PlayField.longestSameColor
+- Implement longestSameColor()
+- Implement updateMatches()
 
 [x] If all functions should be pure, how do I change the state of playField in ColumnsWorld.onTick()??
 
@@ -61,6 +64,9 @@ Functions to run tests on
 [x] remove() - uses random
 
 ###game mechanics functions
+[] longestSameColor()
+Block -> List<Block>
+
 [] updateMatches()
 PlayField (implicit) -> PlayField
 

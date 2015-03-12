@@ -90,7 +90,6 @@ public class PlayField implements TwoDSpaces {
         return outB;
     }
 
-    // TODO: Check for playerPiece + field matches
     // Relatively Complex...
     // For each block in playField,
     // Is there a block with X index +1 away with the same type?
