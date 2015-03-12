@@ -9,8 +9,8 @@ import java.util.ArrayList;
 
 public class PlayField implements TwoDSpaces {
 
-    int playAreaWidth = ColumnsWorld.PLAY_COLUMNS;
-    int playAreaHeight = ColumnsWorld.PLAY_ROWS;
+    int playAreaWidth = ColumnsWorld.PLAY_COLUMNS - 1;
+    int playAreaHeight = ColumnsWorld.PLAY_ROWS - 1;
     public int score = 0;
 
     ArrayList<Block> field;
@@ -84,6 +84,7 @@ public class PlayField implements TwoDSpaces {
     // remove the matched blocks with empty blocks, increment score by 1
     // Removed blocks— they will be handled by "gravity"
 
+
     public PlayField updateMatches() {
 
         return new PlayField();
@@ -124,7 +125,7 @@ public class PlayField implements TwoDSpaces {
 
     // TODO: quickdrop helper - Find nearest Y block in same column
     public Block findNearestY(int col){
-        return Block();
+        return new Block(new Posn(0,0));
     }
 
     public WorldImage draw() {

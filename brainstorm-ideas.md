@@ -1,4 +1,9 @@
+
 #Brainstorming
+
+##CURRENT TASK:
+Figure out why my equality test for Posn isn't working
+
 
 [x] If all functions should be pure, how do I change the state of playField in ColumnsWorld.onTick()??
 
@@ -6,15 +11,18 @@
 
 [ ] Use ColumnsWorld constructor to build a new ColumnsWorld for each function?
 
-[ ] Do I need to test EVERY function?... Even constructors, toString?
+[ NO ] Do I need to test EVERY function?... NOT constructors, not toString?
 
 [ ] How do I know if a test is sensible? Which properties of an object should be tested?
 
 [ ] Should I only test the fields/variables that are relevant/referred to in the function?
 
+RANDOM TESTING: random is approximation of "for all"
+
 [ ]
 
 [ ] Do I need to test onTick itself? Or is it acceptable to just test the functions inside of it?... Possibly difficult to recreate states to compare
+---- Argue if it is worth testing onTick...
 
 [ ]
 
@@ -24,44 +32,52 @@ PROPERTIES ARE RULES- see if the functions obey the mechanics of the game?
 
 Test the most complicated thing first???
 
+Arguing if tests are necessary-
+can generalize
+
+DONT TEST CONSTRUCTORS BECAUSE logic doesn't make sense to do that
+
 #TEST CHECKLIST
 Functions to run tests on
 ##Block
-[] Block()
-Enums are hard to test??
+
 [x] clear() - exhaustive
-[~] equals() - exhaustive
+[x] equals() - exhaustive, random
 [x] isEmpty() - exhaustive
 [x] isSamePosn() - exhaustive
-[~] isSameType() - ??
+[x] isSameType() - exhaustive, random
 
 ##ColumnsWorld
-[] ColumnsWorld()
+
 
 ##PlayerPiece
-[] PlayerPiece
+
 [] cycleUp()
 [] cycleDown()
 
 ##PlayField
-[] PlayField()
-[] getAtXY()
+
+[x] getAtXY() - exhaustive
 
 ###game mechanics functions
 [] updateMatches()
 [] playerLanding()
-[] updateMatches()
 [] movePlayerRight()
 [] movePlayerLeft()
 
 // What should quickDrop return anyway???? A new PlayField?
 [] quickDrop()
+[] findNearestY()
 
 #Pinhole
-[] Pinhole()
+[x] Pinhole()
+[x] samePosn() - Random, sufficient for testing the constructor
+because the test uses the constructor.
+
 
 #Useful notes
 ===
+
 #tester library docs:
 types of reports to run:
 http://www.ccs.neu.edu/javalib/Tester/Running_Tests.html
