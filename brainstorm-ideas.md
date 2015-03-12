@@ -2,8 +2,7 @@
 #Brainstorming
 
 ##CURRENT TASK:
-Figure out why my equality test for Posn isn't working
-
+#Write test for playFieldUpdateMatches
 
 [x] If all functions should be pure, how do I change the state of playField in ColumnsWorld.onTick()??
 
@@ -58,15 +57,13 @@ Functions to run tests on
 ##PlayField
 
 [x] getAtXY() - exhaustive
-[] replace() -
-NOTES:
-Block -> PlayField (with Block at XY replaced with input)
-
-
-[] remove()
+[x] replace() - uses random
+[x] remove() - uses random
 
 ###game mechanics functions
 [] updateMatches()
+PlayField (implicit) -> PlayField
+
 [] playerLanding()
 [] movePlayerRight()
 [] movePlayerLeft()

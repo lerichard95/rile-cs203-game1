@@ -101,11 +101,20 @@ public class PlayField implements TwoDSpaces {
     // remove the matched blocks with empty blocks, increment score by 1
     // Removed blocks— they will be handled by "gravity"
 
-
+    // TODO: Implement updateMatches()
     public PlayField updateMatches() {
+        for (Block bb : this.field) {
+            this.longestSameColor(bb);
+        }
 
         return new PlayField();
     }
+
+    // TODO: Implement longestSameColor
+    public PlayField longestSameColor(){
+
+    }
+
 
 
     // TODO: Gravity- move player down one

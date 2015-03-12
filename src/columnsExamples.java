@@ -223,7 +223,7 @@ public class columnsExamples {
 
 
     public void testPlayFieldRemove(Tester t) {
-        for (int o = 0 ; o <= 10 ; o++) {
+        for (int o = 0; o <= 10; o++) {
             // Must be constrained to indices that are actually used
             int x = Main.rand.nextInt(PlayField.playAreaWidth);
             int y = Main.rand.nextInt(PlayField.playAreaHeight);
@@ -260,6 +260,37 @@ public class columnsExamples {
             }
 
         }
+    }
+
+    //  TODO: write test for PlayField.longestSameColor
+    public void testPlayFieldLongestSameColor(Tester t){
+
+    }
+
+
+    public void testPlayFieldUpdateMatches(Tester t) {
+        // Test for all rows
+        for (int yy = 0; yy <= PlayField.playAreaHeight; yy++) {
+            // Make an empty PlayField
+            PlayField pf1 = new PlayField();
+            PlayField pf2 = pf1;
+            int randType = 1;
+
+            // Fill playfield with matches for an entire row
+            for (int horizMatch = 0; horizMatch <= PlayField.playAreaWidth; horizMatch++) {
+                Posn psn = new Posn(horizMatch, yy);
+                Block bl = new Block(psn, BlockType.values()[randType]);
+                pf1 = pf1.replace(bl);
+            }
+            // Run test
+            t.checkExpect(
+                    pf1.updateMatches(),
+                    pf2,
+                    "testPlayFieldUpdateMatches - entire horiz row"
+            );
+        }
+
+
     }
 
     /*
