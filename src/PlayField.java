@@ -9,6 +9,9 @@ import java.util.ArrayList;
 
 public class PlayField implements TwoDSpaces {
 
+    // Since we are using indices for ArrayList, 0,0 is a valid X/Y.
+    // Directions: Specify the columns and rows in ColumnsWorld,
+    // and they will be converted here to their proper indices
     int playAreaWidth = ColumnsWorld.PLAY_COLUMNS - 1;
     int playAreaHeight = ColumnsWorld.PLAY_ROWS - 1;
     public int score = 0;
@@ -19,7 +22,8 @@ public class PlayField implements TwoDSpaces {
 
     public PlayField() {
         this.field =
-                new ArrayList<Block>(((playAreaWidth * playAreaHeight) - 1));
+                //  Why should this be minus 1?
+                new ArrayList<Block>((playAreaWidth * playAreaHeight));
         //  For loop; fill the field with empty Blocks
         System.out.println("Filling field with EMT Blocks");
         for (int ix = 0; ix <= this.playAreaWidth; ix++) {

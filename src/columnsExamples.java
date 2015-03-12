@@ -173,7 +173,8 @@ public class columnsExamples {
 
     }
 
-    /*public void testPlayFieldUpdateMatches(Tester t) {
+    
+    public void testPlayFieldUpdateMatches(Tester t) {
         ArrayList<Block> ar;
         int rand = 0;
         //  Add a three-pair
@@ -192,6 +193,7 @@ public class columnsExamples {
         PlayField expectPF2 = new PlayField(exp ,1);
 
     }
-*/
+
+
 
 }
