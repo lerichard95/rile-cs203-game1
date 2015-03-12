@@ -175,56 +175,90 @@ public class columnsExamples {
     }
 
     public void testPlayFieldReplace(Tester t) {
-        for (int ij = 0; ij <= 10; ij++) {
-            int x = Main.rand.nextInt();
-            int y = Main.rand.nextInt();
-            int tt = Main.rand.nextInt(BlockType.values().length);
+        int x = Main.rand.nextInt();
+        int y = Main.rand.nextInt();
+        int tt = Main.rand.nextInt(BlockType.values().length);
 
-            Posn pos = new Posn(x, y);
-            //  This block will be added to the playfield
-            Block addedBlock = new Block(pos, BlockType.values()[tt]);
-            Block emptBlock = new Block(pos, BlockType.EMT);
+        Posn pos = new Posn(x, y);
+        //  This block will be added to the playfield
+        Block addedBlock = new Block(pos, BlockType.values()[tt]);
+        Block emptBlock = new Block(pos, BlockType.EMT);
 
-            //  What is inside this doesn't matter for test purposes
-            ArrayList<Block> arPlayerPiece = new ArrayList<Block>(10);
-            //  Ints also don't matter for testing purposes
-            PlayerPiece playerPiece = new PlayerPiece(arPlayerPiece, x, x);
+        //  What is inside this doesn't matter for test purposes
+        ArrayList<Block> arPlayerPiece = new ArrayList<Block>(10);
+        //  Ints also don't matter for testing purposes
+        PlayerPiece playerPiece = new PlayerPiece(arPlayerPiece, x, x);
 
 
-            // This is the playfield to check against
-            // Make an ArrayList, add a non-empty block to it
+        // This is the playfield to check against
+        // Make an ArrayList, add a non-empty block to it
 
-            //  Fill this with empties
-            ArrayList<Block> ar = new ArrayList<Block>(PlayField.playAreaWidth * PlayField.playAreaHeight);
-            System.out.println("Filling field with EMT Blocks");
-            for (int ix = 0; ix <= PlayField.playAreaWidth; ix++) {
-                for (int iy = 0; iy <= PlayField.playAreaHeight; iy++) {
-                    ar.add(
-                            new Block(
-                                    new Posn(ix, iy),
-                                    BlockType.EMT));
-                }
+        //  Fill this with empties
+        ArrayList<Block> ar = new ArrayList<Block>(PlayField.playAreaWidth * PlayField.playAreaHeight);
+        for (int ix = 0; ix <= PlayField.playAreaWidth; ix++) {
+            for (int iy = 0; iy <= PlayField.playAreaHeight; iy++) {
+                ar.add(
+                        new Block(
+                                new Posn(ix, iy),
+                                BlockType.EMT));
             }
-
-
-            // This is the initial playfield
-            PlayField pf1 = new PlayField(ar, playerPiece, 0);
-
-            //  TODO: This might not work if ArrayList's remove uses true equality and not equivalence
-            ArrayList<Block> ar2 = ar;
-            ar2.remove(emptBlock);
-            ar2.add(addedBlock);
-
-            PlayField pf2 = new PlayField(ar2, playerPiece, 0);
-
-            t.checkExpect(
-                    pf1.replace(addedBlock),
-                    pf2,
-                    "testPlayFieldReplace - replace a block");
         }
+
+
+        // This is the initial playfield
+        PlayField pf1 = new PlayField(ar, playerPiece, 0);
+
+        //  TODO: This might not work if ArrayList's remove uses true equality and not equivalence
+        ArrayList<Block> ar2 = ar;
+        ar2.remove(emptBlock);
+        ar2.add(addedBlock);
+
+        PlayField pf2 = new PlayField(ar2, playerPiece, 0);
+
+        t.checkExpect(
+                pf1.replace(addedBlock),
+                pf2,
+                "testPlayFieldReplace - replace a block");
+
     }
 
+
     public void testPlayFieldRemove(Tester t) {
+
+        int x = Main.rand.nextInt();
+        int y = Main.rand.nextInt();
+        Posn pos = new Posn(x, y);
+
+        // Only nonempty types
+        int tt = 1 + Main.rand.nextInt(BlockType.values().length - 1);
+
+        Block somethingBlock = new Block(pos, BlockType.values()[tt]);
+        Block emptyBlock = new Block(pos, BlockType.EMT);
+
+        PlayField pfInit = new PlayField();
+
+        //  Copy for comparison
+        PlayField pf1 = pfInit;
+        // Replace all empties with somethingBlocks
+        for (int ix = 0; ix <= PlayField.playAreaWidth; ix++) {
+            for (int iy = 0; iy <= PlayField.playAreaHeight; iy++) {
+                pf1 = pf1.replace(somethingBlock);
+            }
+        }
+
+        PlayField pf2 = pf1;
+        // Replace all the somethingBlocks with empties
+        for (int ix = 0; ix <= PlayField.playAreaWidth; ix++) {
+            for (int iy = 0; iy <= PlayField.playAreaHeight; iy++) {
+                pf2 = pf2.replace(emptyBlock);
+
+                t.checkExpect(
+                        pf1.remove(somethingBlock),
+                        pf2,
+                        "testPlayFieldRemove - add somethings, remove somethings");
+            }
+        }
+
 
     }
 
