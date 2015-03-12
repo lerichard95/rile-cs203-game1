@@ -1,6 +1,7 @@
 import tester.*;
 import javalib.worldimages.Posn;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 
@@ -174,10 +175,53 @@ public class columnsExamples {
     }
 
     public void testPlayFieldReplace(Tester t) {
+        int x = 0;
+        int y = 0;
+        int tt = 2;
+        Posn pos = new Posn(x, y);
+        //  This block will be added to the playfield
+        Block addedBlock = new Block(pos, BlockType.values()[tt]);
+        Block emptBlock = new Block(pos, BlockType.EMT);
 
-            PlayField pf1 = new PlayField();
+        //  What is inside this doesn't matter for test purposes
+        ArrayList<Block> arPlayerPiece = new ArrayList<Block>(10);
+        //  Ints also don't matter for testing purposes
+        PlayerPiece playerPiece = new PlayerPiece(arPlayerPiece, 0, 0);
+
+
+        // This is the playfield to check against
+        // Make an ArrayList, add a non-empty block to it
+
+        //  Fill this with empties
+        ArrayList<Block> ar = new ArrayList<Block>(PlayField.playAreaWidth * PlayField.playAreaHeight);
+        System.out.println("Filling field with EMT Blocks");
+        for (int ix = 0; ix <= PlayField.playAreaWidth; ix++) {
+            for (int iy = 0; iy <= PlayField.playAreaHeight; iy++) {
+                ar.add(
+                        new Block(
+                                new Posn(ix, iy),
+                                BlockType.EMT));
+            }
+        }
+
+
+        // This is the initial playfield
+        PlayField pf1 = new PlayField(ar, playerPiece, 0);
+
+        //  TODO: This might not work if ArrayList's remove uses true equality and not equivalence
+        ArrayList<Block> ar2 = ar;
+        ar2.remove(emptBlock);
+        ar2.add(addedBlock);
+
+        PlayField pf2 = new PlayField(ar2, playerPiece, 0);
+
+        t.checkExpect(
+                pf1.replace(addedBlock),
+                pf2,
+                "testPlayFieldReplace - replace a block");
 
     }
+
     public void testPlayFieldRemove(Tester t) {
 
     }

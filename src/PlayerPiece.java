@@ -30,8 +30,10 @@ public class PlayerPiece {
     }
 
     //  Constructor for updating state
-    public PlayerPiece(ArrayList<Block> pp) {
+    public PlayerPiece(ArrayList<Block> pp, int xx, int yy) {
         this.player = pp;
+        this.indexX = xx;
+        this.indexY = yy;
     }
 
     // TODO: cycle the order of the blocks upwards one
