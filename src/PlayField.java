@@ -67,6 +67,12 @@ public class PlayField implements TwoDSpaces {
         return new PlayField(newField, this.playerPiece, this.score);
     }
 
+    public PlayField remove(Block bb) {
+        Posn newPos = bb.posn();
+        Block emptyBlock = new Block(newPos, BlockType.EMT);
+        return this.replace(emptyBlock);
+    }
+
     public Block getAtXY(Posn pp) throws RuntimeException {
         Block outB = new Block(new Posn(-1, -1), BlockType.EMT);
 

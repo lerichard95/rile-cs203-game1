@@ -208,7 +208,6 @@ public class columnsExamples {
         // This is the initial playfield
         PlayField pf1 = new PlayField(ar, playerPiece, 0);
 
-        //  TODO: This might not work if ArrayList's remove uses true equality and not equivalence
         ArrayList<Block> ar2 = ar;
         ar2.remove(emptBlock);
         ar2.add(addedBlock);
@@ -225,8 +224,9 @@ public class columnsExamples {
 
     public void testPlayFieldRemove(Tester t) {
 
-        int x = Main.rand.nextInt();
-        int y = Main.rand.nextInt();
+        // Must be constrained to indices that are actually used
+        int x = Main.rand.nextInt() % PlayField.playAreaWidth;
+        int y = Main.rand.nextInt() % PlayField.playAreaHeight;
         Posn pos = new Posn(x, y);
 
         // Only nonempty types
