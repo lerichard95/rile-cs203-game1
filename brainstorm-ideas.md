@@ -58,6 +58,12 @@ Functions to run tests on
 ##PlayField
 
 [x] getAtXY() - exhaustive
+[] replace() -
+NOTES:
+Block -> PlayField (with Block at XY replaced with input)
+
+
+[] remove()
 
 ###game mechanics functions
 [] updateMatches()
@@ -73,7 +79,6 @@ Functions to run tests on
 [x] Pinhole()
 [x] samePosn() - Random, sufficient for testing the constructor
 because the test uses the constructor.
-
 
 #Useful notes
 ===

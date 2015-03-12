@@ -173,27 +173,70 @@ public class columnsExamples {
 
     }
 
-    
-    public void testPlayFieldUpdateMatches(Tester t) {
-        ArrayList<Block> ar;
-        int rand = 0;
-        //  Add a three-pair
-        for (int i = 0; i <= 2; i++) {
-            //  Change 0 later
-            int horiz = i % (ColumnsWorld.PLAY_COLUMNS - 1);
-            Posn psn = new Posn(horiz, 0);
-            Block bl = new Block(psn ,BlockType.values()[rand]);
-            ar.add(bl);
-        }
+    public void testPlayFieldReplace(Tester t) {
 
-        PlayField testPF1 = new PlayField(ar, 0);
+            PlayField pf1 = new PlayField();
 
-        ArrayList<Block> exp;
-        // One match found- emptied block AND +1 point
-        PlayField expectPF2 = new PlayField(exp ,1);
+    }
+    public void testPlayFieldRemove(Tester t) {
 
     }
 
+    /*
+    public void testPlayFieldUpdateMatches(Tester t) {
+        //  Fill this with empties
+        ArrayList<Block> ar = new ArrayList<Block>(PlayField.playAreaWidth * PlayField.playAreaHeight);
+        System.out.println("Filling field with EMT Blocks");
+        for (int ix = 0; ix <= PlayField.playAreaWidth; ix++) {
+            for (int iy = 0; iy <= PlayField.playAreaHeight; iy++) {
+                // TODO: Check the i and j values
+                //System.out.println("ix: " + ix + ", iy: " + iy);
+                this.field.add(
+                        new Block(
+                                // TODO: All uses of Block constructor need to pass an index
+                                new Posn(ix, iy),
+                                BlockType.EMT));
+            }
+        }
 
+        //  Change 0 later
+        int rand = 2;
+        //  Add a match spanning ALL of the game
+        for (int ix = 0; ix <= PlayField.playAreaWidth; ix++) {
+            int horiz = ix;
+            int ind = -1;
+            boolean emptyFound = false;
+            Posn psn = new Posn(horiz, rand);
+            Block bl = new Block(psn, BlockType.values()[rand]);
+
+            //  Get the empty block at X/Y in the array
+            for (Block b : ar) {
+                if (b.isSamePosn(psn)) {
+                    emptyFound = true;
+                    ind = ar.indexOf(b);
+                }
+            }
+
+            if (emptyFound) {
+                //  Remove the empty block from the array
+                ar.remove(ar.get(ind));
+            } else {
+                //  Add the match block
+                ar.add(bl);
+            }
+        }
+        //  Make the matchedPlayField
+        PlayField matchedPF1 = new PlayField(ar, 0);
+
+        ArrayList<Block> exp;
+        // One match found- emptied block AND +1 point
+        PlayField expectPF2 = new PlayField();
+        t.checkExpect(
+                matchedPF1.updateMatches(),
+                expectPF2,
+                "testUpdateMatches - horizontal matches found");
+
+    }
+    */
 
 }

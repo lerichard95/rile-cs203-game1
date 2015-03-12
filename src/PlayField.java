@@ -12,8 +12,8 @@ public class PlayField implements TwoDSpaces {
     // Since we are using indices for ArrayList, 0,0 is a valid X/Y.
     // Directions: Specify the columns and rows in ColumnsWorld,
     // and they will be converted here to their proper indices
-    int playAreaWidth = ColumnsWorld.PLAY_COLUMNS - 1;
-    int playAreaHeight = ColumnsWorld.PLAY_ROWS - 1;
+    public static final int playAreaWidth = ColumnsWorld.PLAY_COLUMNS - 1;
+    public static final int playAreaHeight = ColumnsWorld.PLAY_ROWS - 1;
     public int score = 0;
 
     ArrayList<Block> field;
@@ -26,8 +26,8 @@ public class PlayField implements TwoDSpaces {
                 new ArrayList<Block>((playAreaWidth * playAreaHeight));
         //  For loop; fill the field with empty Blocks
         System.out.println("Filling field with EMT Blocks");
-        for (int ix = 0; ix <= this.playAreaWidth; ix++) {
-            for (int iy = 0; iy <= this.playAreaHeight; iy++) {
+        for (int ix = 0; ix <= PlayField.playAreaWidth; ix++) {
+            for (int iy = 0; iy <= PlayField.playAreaHeight; iy++) {
                 // TODO: Check the i and j values
                 //System.out.println("ix: " + ix + ", iy: " + iy);
                 this.field.add(
@@ -40,23 +40,24 @@ public class PlayField implements TwoDSpaces {
 
         //  TODO: Make a new player piece on init
         //  Choose a random x for the PlayerPiece
-        int playerInitX = Main.rand.nextInt(this.playAreaWidth) * ColumnsWorld.BLOCK_SIZE;
+        int playerInitX = Main.rand.nextInt(PlayField.playAreaWidth) * ColumnsWorld.BLOCK_SIZE;
         this.playerPiece = new PlayerPiece(playerInitX);
     }
 
 
     // Constructor for updating state
-    public PlayField(ArrayList<Block> ff, int sc) {
+    public PlayField(ArrayList<Block> ff, PlayerPiece pp, int sc) {
         this.field = ff;
+        this.playerPiece = pp;
         this.score = sc;
     }
 
     public int width() {
-        return this.playAreaWidth;
+        return PlayField.playAreaWidth;
     }
 
     public int height() {
-        return this.playAreaHeight;
+        return PlayField.playAreaHeight;
     }
 
     public Block getAtXY(Posn pp) throws RuntimeException {
