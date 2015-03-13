@@ -66,7 +66,7 @@ because the test uses the constructor.
 [x] replace() - uses random
 [x] remove() - uses random
 ####game mechanics functions
-[] longestSameColor()
+[x] longestSameColor()
 Block -> List<Block>
 
 [] updateMatches()
