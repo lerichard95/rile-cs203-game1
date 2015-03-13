@@ -3,9 +3,11 @@
 
 ##CURRENT TASK:
 - Write test for playFieldUpdateMatches
-- Design test for PlayField.longestSameColor
+[x] Design test for PlayField.longestSameColor
 - Implement longestSameColor()
 - Implement updateMatches()
+
+===
 
 [x] If all functions should be pure, how do I change the state of playField in ColumnsWorld.onTick()??
 

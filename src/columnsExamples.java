@@ -273,13 +273,13 @@ public class columnsExamples {
         int score = 0;
 
         // Make an empty list
-        ArrayList<Block> list = new ArrayList<Block>();
+        ArrayList<Block> list = new ArrayList<Block>((PlayField.playAreaWidth * PlayField.playAreaHeight));
         int randType = 1;
 
-        // Fill playfield with matches for an entire row
-        for (int horizMatch = 0; horizMatch <= PlayField.playAreaWidth; horizMatch++) {
+        // Fill list with matches for an entire row
+        for (int changeY = 0; changeY <= PlayField.playAreaWidth; changeY++) {
             //  update 0 to be a yy to loop through all columns
-            Posn psn = new Posn(0, horizMatch);
+            Posn psn = new Posn(0, changeY);
             Block bl = new Block(psn, BlockType.values()[randType]);
             listMatches.add(bl);
             list.add(bl);
@@ -288,16 +288,24 @@ public class columnsExamples {
         PlayField pf1 = new PlayField(list, piece, score);
 
         //  Run test for a block, check against the list of Blocks with a horizontal match
+
+        //  Initialize with a sentinel block
+        Posn sentPos = new Posn(-1, -1);
+        Block sentBlock = new Block(sentPos, BlockType.EMT);
+
+        //  Initialize with an empty accumulator
+        ArrayList<Block> accum = new ArrayList<Block>();
+
         t.checkExpect(
                 //  TODO: change the input block to a random one in the list - because it doesn't matter
-                pf1.longestSameColor( listMatches.get(0) ),
+                pf1.longestSameColor(listMatches.get(0), sentBlock, accum),
                 listMatches,
                 "testPlayFieldLongestSameColor - horizontal row of matches"
         );
 
     }
 
-
+    /*
     public void testPlayFieldUpdateMatches(Tester t) {
         // Test for all rows
         for (int yy = 0; yy <= PlayField.playAreaHeight; yy++) {
@@ -322,62 +330,7 @@ public class columnsExamples {
 
 
     }
-
-    /*
-    public void testPlayFieldUpdateMatches(Tester t) {
-        //  Fill this with empties
-        ArrayList<Block> ar = new ArrayList<Block>(PlayField.playAreaWidth * PlayField.playAreaHeight);
-        System.out.println("Filling field with EMT Blocks");
-        for (int ix = 0; ix <= PlayField.playAreaWidth; ix++) {
-            for (int iy = 0; iy <= PlayField.playAreaHeight; iy++) {
-                // TODO: Check the i and j values
-                //System.out.println("ix: " + ix + ", iy: " + iy);
-                this.field.add(
-                        new Block(
-                                // TODO: All uses of Block constructor need to pass an index
-                                new Posn(ix, iy),
-                                BlockType.EMT));
-            }
-        }
-
-        //  Change 0 later
-        int rand = 2;
-        //  Add a match spanning ALL of the game
-        for (int ix = 0; ix <= PlayField.playAreaWidth; ix++) {
-            int horiz = ix;
-            int ind = -1;
-            boolean emptyFound = false;
-            Posn psn = new Posn(horiz, rand);
-            Block bl = new Block(psn, BlockType.values()[rand]);
-
-            //  Get the empty block at X/Y in the array
-            for (Block b : ar) {
-                if (b.isSamePosn(psn)) {
-                    emptyFound = true;
-                    ind = ar.indexOf(b);
-                }
-            }
-
-            if (emptyFound) {
-                //  Remove the empty block from the array
-                ar.remove(ar.get(ind));
-            } else {
-                //  Add the match block
-                ar.add(bl);
-            }
-        }
-        //  Make the matchedPlayField
-        PlayField matchedPF1 = new PlayField(ar, 0);
-
-        ArrayList<Block> exp;
-        // One match found- emptied block AND +1 point
-        PlayField expectPF2 = new PlayField();
-        t.checkExpect(
-                matchedPF1.updateMatches(),
-                expectPF2,
-                "testUpdateMatches - horizontal matches found");
-
-    }
     */
+
 
 }

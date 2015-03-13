@@ -85,7 +85,7 @@ public class PlayField implements TwoDSpaces {
         //  Using a sentinel value : posn x, y can never be -1
         if (outB.equals(new Block(new Posn(-1, -1), BlockType.EMT))) {
             // TODO: Catch the RuntimeException in the caller of outB
-            throw new RuntimeException("ERROR: Block with Posn( " + pp.x + ", "+ pp.y + " ) not found");
+            throw new RuntimeException("ERROR: Block with Posn( " + pp.x + ", " + pp.y + " ) not found");
         }
         return outB;
     }
@@ -93,14 +93,53 @@ public class PlayField implements TwoDSpaces {
     // Relatively Complex...
     // For each block in playField,
     // Is there a block with X index +1 away with the same type?
-    // Is there a block with X index 1 away with the same type?
+    // Is there a block with X index -1 away with the same type?
     // Is there a block with Y index -1 away with the same type?
     // Is there a block with Y index +1 away with the same type?
+
     // If so, check one more time if there is one nearby ^^, and then
     // remove the matched blocks with empty blocks, increment score by 1
     // Removed blocks— they will be handled by "gravity"
 
+
+
+
+    // TODO: Implement longestSameColor
+    public ArrayList<Block> longestSameColor(Block bb, Block prevBlock, ArrayList<Block> acc) {
+        Posn right = new Posn(bb.posn().x + 1, bb.posn().y);
+
+        Block rightBlock = this.getAtXY(right);
+        if (rightBlock.isSameType(bb) && !(rightBlock.equals(prevBlock))) {
+            acc.add(rightBlock);
+            this.longestSameColor(rightBlock, bb, acc);
+        }
+
+        Posn left = new Posn(bb.posn().x - 1, bb.posn().y);
+        Block leftBlock = this.getAtXY(left);
+        if (leftBlock.isSameType(bb) && !(leftBlock.equals(prevBlock))) {
+            acc.add(leftBlock);
+            this.longestSameColor(leftBlock, bb, acc);
+        }
+
+        Posn above = new Posn(bb.posn().x, bb.posn().y - 1);
+        Block aboveBlock = this.getAtXY(above);
+        if (aboveBlock.isSameType(bb) && !(aboveBlock.equals(prevBlock))) {
+            acc.add(aboveBlock);
+            this.longestSameColor(aboveBlock, bb, acc);
+        }
+
+        Posn below = new Posn(bb.posn().x, bb.posn().y + 1);
+        Block belowBlock = this.getAtXY(below);
+        if (belowBlock.isSameType(bb) && !(belowBlock.equals(prevBlock))) {
+            acc.add(belowBlock);
+            this.longestSameColor(belowBlock, bb, acc);
+        }
+
+        return acc;
+    }
+
     // TODO: Implement updateMatches()
+    /*
     public PlayField updateMatches() {
         for (Block bb : this.field) {
             this.longestSameColor(bb);
@@ -108,13 +147,7 @@ public class PlayField implements TwoDSpaces {
 
         return new PlayField();
     }
-
-    // TODO: Implement longestSameColor
-    public PlayField longestSameColor(Block bb){
-
-    }
-
-
+    */
 
     // TODO: Gravity- move player down one
     // Update Y indices of playerPiece by adding 1, if they do not cause illegal collision
