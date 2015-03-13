@@ -174,9 +174,19 @@ public class PlayField implements TwoDSpaces {
 
     // TODO: Move player left
     // Update all X indices of PlayerPiece one by subtracting one, if they do not cause illegal collisions
-    public PlayerPiece movePlayerLeft() {
+    public PlayField movePlayerLeft() {
+        //
+        ArrayList<Block> playerMoved = this.playerPiece.player;
 
-        return new PlayerPiece(3);
+        if (this.playerPiece.indexX != 0) {
+            for (Block bb : playerMoved) {
+                bb.posn().x = bb.posn().x - 1;
+            }
+        }
+        PlayerPiece newPiece = new PlayerPiece(playerMoved, this.playerPiece.indexX - 1, this.playerPiece.indexY);
+        PlayField newField = new PlayField(this.field, newPiece, this.score);
+
+        return newField;
     }
 
     // TODO: Move player right
