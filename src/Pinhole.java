@@ -29,9 +29,12 @@ public class Pinhole extends Posn {
     *
      */
     public boolean sameValues(Posn pp) {
+        /*
+        Print statements for debugging
         System.out.println("this.pinX: " +this.pinX+ ", this.pinY: " + this.pinY);
         System.out.println("this.x: " + this.x + ", this.y: " + this.y);
         System.out.println("pp.x: " + pp.x + ", pp.y: " + pp.y);
+        */
         return ((this.pinX == pp.x)
                 &&
                 (this.pinY == pp.y));

@@ -4,7 +4,7 @@ import javalib.worldcanvas.*;
 
 public class ColumnsWorld extends javalib.funworld.World {
 
-    static final int BLOCK_SIZE = 40;
+    static final int BLOCK_SIZE = 50;
     static final int PLAY_ROWS = 5;
     static final int PLAY_COLUMNS = 8;
 

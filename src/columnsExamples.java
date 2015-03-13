@@ -170,34 +170,36 @@ public class ColumnsExamples {
             }
         }
 
-        // Make an ArrayList with random typed blocks
-        ArrayList<Block> field2 = new ArrayList<Block>(PlayField.playArea);
-        for (int xx = 0; xx < fieldTest1.playAreaWidth; xx++) {
-            for (int yy = 0; yy < fieldTest1.playAreaHeight; yy++) {
-                int randType = Main.rand.nextInt(BlockType.values().length);
-                Posn pos = new Posn(xx, yy);
-                Block bb = new Block(pos, BlockType.values()[randType]);
-                field2.add(bb);
+        for (int sp = 0; sp < 100; sp++) {
+            // Make an ArrayList with random typed blocks
+            ArrayList<Block> field2 = new ArrayList<Block>(PlayField.playArea);
+            for (int xx = 0; xx < fieldTest1.playAreaWidth; xx++) {
+                for (int yy = 0; yy < fieldTest1.playAreaHeight; yy++) {
+                    int randType = Main.rand.nextInt(BlockType.values().length);
+                    Posn pos = new Posn(xx, yy);
+                    Block bb = new Block(pos, BlockType.values()[randType]);
+                    field2.add(bb);
+                }
             }
-        }
-        // Copy the ArrayList...
-        ArrayList<Block> field3 = field2;
-        //  What is inside this doesn't matter for test purposes
-        ArrayList<Block> arPlayerPiece = new ArrayList<Block>(10);
-        //  Ints also don't matter for testing purposes
-        int randInt = Main.rand.nextInt();
-        PlayerPiece piece = new PlayerPiece(arPlayerPiece, randInt, randInt);
-        int score = 0;
+            // Copy the ArrayList...
+            ArrayList<Block> field3 = field2;
+            //  What is inside this doesn't matter for test purposes
+            ArrayList<Block> arPlayerPiece = new ArrayList<Block>(10);
+            //  Ints also don't matter for testing purposes
+            int randInt = Main.rand.nextInt();
+            PlayerPiece piece = new PlayerPiece(arPlayerPiece, randInt, randInt);
+            int score = 0;
 
-        // Make a playfield from the array
-        PlayField testField2 = new PlayField(field2, piece, score);
+            // Make a playfield from the array
+            PlayField testField2 = new PlayField(field2, piece, score);
 
-        // Retrieve blocks from the PlayField and check against the blocks from the array
-        for (Block bx : field2) {
-            t.checkExpect(
-                    testField2.getAtXY(bx.posn()),
-                    bx,
-                    "testPlayFieldGetAtXY - random BlockType");
+            // Retrieve blocks from the PlayField and check against the blocks from the array
+            for (Block bx : field2) {
+                t.checkExpect(
+                        testField2.getAtXY(bx.posn()),
+                        bx,
+                        "testPlayFieldGetAtXY - random BlockType");
+            }
         }
     }
 
@@ -225,55 +227,54 @@ public class ColumnsExamples {
     }
 
     public void testPlayFieldReplace(Tester t) {
-        int x = Main.rand.nextInt();
-        int y = Main.rand.nextInt();
-        int tt = Main.rand.nextInt(BlockType.values().length);
+        for (int asp = 0; asp <= 100; asp++) {
+            int x = Main.rand.nextInt();
+            int y = Main.rand.nextInt();
+            int tt = Main.rand.nextInt(BlockType.values().length);
+            Posn pos = new Posn(x, y);
+            //  This block will be added to the playfield
+            Block addedBlock = new Block(pos, BlockType.values()[tt]);
+            Block emptBlock = new Block(pos, BlockType.EMT);
 
-        Posn pos = new Posn(x, y);
-        //  This block will be added to the playfield
-        Block addedBlock = new Block(pos, BlockType.values()[tt]);
-        Block emptBlock = new Block(pos, BlockType.EMT);
+            //  What is inside this doesn't matter for test purposes
+            ArrayList<Block> arPlayerPiece = new ArrayList<Block>(10);
+            //  Ints also don't matter for testing purposes
+            PlayerPiece playerPiece = new PlayerPiece(arPlayerPiece, x, x);
 
-        //  What is inside this doesn't matter for test purposes
-        ArrayList<Block> arPlayerPiece = new ArrayList<Block>(10);
-        //  Ints also don't matter for testing purposes
-        PlayerPiece playerPiece = new PlayerPiece(arPlayerPiece, x, x);
+            // This is the playfield to check against
+            // Make an ArrayList, add a non-empty block to it
 
-
-        // This is the playfield to check against
-        // Make an ArrayList, add a non-empty block to it
-
-        //  Fill this with empties
-        ArrayList<Block> ar = new ArrayList<Block>(PlayField.playAreaWidth * PlayField.playAreaHeight);
-        for (int ix = 0; ix <= PlayField.playAreaWidth; ix++) {
-            for (int iy = 0; iy <= PlayField.playAreaHeight; iy++) {
-                ar.add(
-                        new Block(
-                                new Posn(ix, iy),
-                                BlockType.EMT));
+            //  Fill this with empties
+            ArrayList<Block> ar = new ArrayList<Block>(PlayField.playAreaWidth * PlayField.playAreaHeight);
+            for (int ix = 0; ix <= PlayField.playAreaWidth; ix++) {
+                for (int iy = 0; iy <= PlayField.playAreaHeight; iy++) {
+                    ar.add(
+                            new Block(
+                                    new Posn(ix, iy),
+                                    BlockType.EMT));
+                }
             }
+
+            // This is the initial playfield
+            PlayField pf1 = new PlayField(ar, playerPiece, 0);
+
+            ArrayList<Block> ar2 = ar;
+            ar2.remove(emptBlock);
+            ar2.add(addedBlock);
+
+            PlayField pf2 = new PlayField(ar2, playerPiece, 0);
+
+            t.checkExpect(
+                    pf1.replace(addedBlock),
+                    pf2,
+                    "testPlayFieldReplace - replace a block");
+
         }
-
-
-        // This is the initial playfield
-        PlayField pf1 = new PlayField(ar, playerPiece, 0);
-
-        ArrayList<Block> ar2 = ar;
-        ar2.remove(emptBlock);
-        ar2.add(addedBlock);
-
-        PlayField pf2 = new PlayField(ar2, playerPiece, 0);
-
-        t.checkExpect(
-                pf1.replace(addedBlock),
-                pf2,
-                "testPlayFieldReplace - replace a block");
-
     }
 
 
     public void testPlayFieldRemove(Tester t) {
-        for (int o = 0; o <= 10; o++) {
+        for (int o = 0; o <= 100; o++) {
             // Must be constrained to indices that are actually used
             int x = Main.rand.nextInt(PlayField.playAreaWidth);
             int y = Main.rand.nextInt(PlayField.playAreaHeight);
