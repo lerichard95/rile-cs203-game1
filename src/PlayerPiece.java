@@ -60,12 +60,13 @@ public class PlayerPiece {
         ArrayList<Block> outArray = this.player;
 
         PlayerPiece outPiece = new PlayerPiece(outArray, this.indexX, this.indexY);
-        if (this.indexX != PlayField.MAX_WIDTH_INDEX) {
+        if (this.indexX < PlayField.MAX_WIDTH_INDEX) {
+            int newX = this.indexX + 1;
             for (Block bb : outArray) {
-                bb.posn().x = bb.posn().x + 1;
+                bb.posn().x = newX;
             }
             //  Make a playerPiece out of the shifted indices
-            outPiece = new PlayerPiece(outArray, this.indexX + 1, this.indexY);
+            outPiece = new PlayerPiece(outArray, newX, this.indexY);
         } else {
             //  Replace the playerPiece, but don't shift index
             outPiece = new PlayerPiece(outArray, this.indexX, this.indexY);
