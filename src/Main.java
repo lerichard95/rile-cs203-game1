@@ -17,8 +17,8 @@ public class Main {
         ColumnsWorld game = new ColumnsWorld();
 
         //  Set window height and width based on the columns and rows of the game
-        WINDOW_HEIGHT = ColumnsWorld.PLAY_COLUMNS * ColumnsWorld.BLOCK_SIZE;
-        WINDOW_WIDTH = ColumnsWorld.PLAY_ROWS * ColumnsWorld.BLOCK_SIZE;
+        WINDOW_HEIGHT = ColumnsWorld.PLAY_ROWS * ColumnsWorld.BLOCK_SIZE;
+        WINDOW_WIDTH =  ColumnsWorld.PLAY_COLUMNS* ColumnsWorld.BLOCK_SIZE;
 
         System.out.println("big bang starting");
         game.bigBang(WINDOW_WIDTH, WINDOW_HEIGHT, 1.0);

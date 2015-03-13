@@ -1,7 +1,6 @@
 import tester.*;
 import javalib.worldimages.Posn;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 
@@ -159,8 +158,8 @@ public class ColumnsExamples {
 
     public void testPlayFieldGetAtXY(Tester t) {
         PlayField fieldTest1 = new PlayField();
-        for (int xx = 0; xx < fieldTest1.playAreaWidth; xx++) {
-            for (int yy = 0; yy < fieldTest1.playAreaHeight; yy++) {
+        for (int xx = 0; xx < fieldTest1.MAX_WIDTH_INDEX; xx++) {
+            for (int yy = 0; yy < fieldTest1.MAX_HEIGHT_INDEX; yy++) {
 
                 Posn pos = new Posn(xx, yy);
                 Block bb = new Block(pos, BlockType.EMT);
@@ -173,8 +172,8 @@ public class ColumnsExamples {
         for (int sp = 0; sp < 100; sp++) {
             // Make an ArrayList with random typed blocks
             ArrayList<Block> field2 = new ArrayList<Block>(PlayField.playArea);
-            for (int xx = 0; xx < fieldTest1.playAreaWidth; xx++) {
-                for (int yy = 0; yy < fieldTest1.playAreaHeight; yy++) {
+            for (int xx = 0; xx < fieldTest1.MAX_WIDTH_INDEX; xx++) {
+                for (int yy = 0; yy < fieldTest1.MAX_HEIGHT_INDEX; yy++) {
                     int randType = Main.rand.nextInt(BlockType.values().length);
                     Posn pos = new Posn(xx, yy);
                     Block bb = new Block(pos, BlockType.values()[randType]);
@@ -245,9 +244,9 @@ public class ColumnsExamples {
             // Make an ArrayList, add a non-empty block to it
 
             //  Fill this with empties
-            ArrayList<Block> ar = new ArrayList<Block>(PlayField.playAreaWidth * PlayField.playAreaHeight);
-            for (int ix = 0; ix <= PlayField.playAreaWidth; ix++) {
-                for (int iy = 0; iy <= PlayField.playAreaHeight; iy++) {
+            ArrayList<Block> ar = new ArrayList<Block>(PlayField.MAX_WIDTH_INDEX * PlayField.MAX_HEIGHT_INDEX);
+            for (int ix = 0; ix <= PlayField.MAX_WIDTH_INDEX; ix++) {
+                for (int iy = 0; iy <= PlayField.MAX_HEIGHT_INDEX; iy++) {
                     ar.add(
                             new Block(
                                     new Posn(ix, iy),
@@ -276,8 +275,8 @@ public class ColumnsExamples {
     public void testPlayFieldRemove(Tester t) {
         for (int o = 0; o <= 100; o++) {
             // Must be constrained to indices that are actually used
-            int x = Main.rand.nextInt(PlayField.playAreaWidth);
-            int y = Main.rand.nextInt(PlayField.playAreaHeight);
+            int x = Main.rand.nextInt(PlayField.MAX_WIDTH_INDEX);
+            int y = Main.rand.nextInt(PlayField.MAX_HEIGHT_INDEX);
             Posn pos = new Posn(x, y);
 
             // Only nonempty types
@@ -291,16 +290,16 @@ public class ColumnsExamples {
             //  Copy for comparison
             PlayField pf1 = pfInit;
             // Replace all empties with somethingBlocks
-            for (int ix = 0; ix <= PlayField.playAreaWidth; ix++) {
-                for (int iy = 0; iy <= PlayField.playAreaHeight; iy++) {
+            for (int ix = 0; ix <= PlayField.MAX_WIDTH_INDEX; ix++) {
+                for (int iy = 0; iy <= PlayField.MAX_HEIGHT_INDEX; iy++) {
                     pf1 = pf1.replace(somethingBlock);
                 }
             }
 
             PlayField pf2 = pf1;
             // Replace all the somethingBlocks with empties
-            for (int ix = 0; ix <= PlayField.playAreaWidth; ix++) {
-                for (int iy = 0; iy <= PlayField.playAreaHeight; iy++) {
+            for (int ix = 0; ix <= PlayField.MAX_WIDTH_INDEX; ix++) {
+                for (int iy = 0; iy <= PlayField.MAX_HEIGHT_INDEX; iy++) {
                     pf2 = pf2.replace(emptyBlock);
 
                     t.checkExpect(
@@ -313,7 +312,7 @@ public class ColumnsExamples {
         }
     }
 
-    /*
+
     //  TODO: write test for PlayField.longestSameColor
     public void testPlayFieldLongestSameColor(Tester t) {
         // TODO: Issue- don't forget the empty blocks- use constructor
@@ -321,26 +320,29 @@ public class ColumnsExamples {
 
         PlayField pf1 = new PlayField();
 
+        // Make an empty list
+        ArrayList<Block> list = new ArrayList<Block>(ColumnsWorld.PLAY_COLUMNS);
         //  Make a list to compare
-        ArrayList<Block> listMatches = new ArrayList<Block>();
+        ArrayList<Block> listMatches = list;
 
         //  playerPiece doesn't matter
         PlayerPiece piece = new PlayerPiece(listMatches, 0, 0);
-
-        // Make an empty list
-        ArrayList<Block> list = new ArrayList<Block>(PlayField.playArea);
         int randType = 1;
 
         // Fill list with matches for an entire row
-        for (int changeY = 0; changeY <= PlayField.playAreaWidth; changeY++) {
+        for (int changeX = 0; changeX <= PlayField.MAX_WIDTH_INDEX; changeX++) {
             //  update 0 to be a yy to loop through all columns
-            Posn psn = new Posn(0, changeY);
+            Posn psn = new Posn(changeX, 0);
+            System.out.println("psn.x: " + psn.x + ", psn.y: " + psn.y);
             Block bl = new Block(psn, BlockType.values()[randType]);
+
             listMatches.add(bl);
             list.add(bl);
+
         }
         //  Add the list of Blocks into the PlayField
         for (Block bb : listMatches) {
+            System.out.println("bb.posn().x: " + bb.posn().x + ", bb.posn().y: " + bb.posn().y);
             pf1 = pf1.replace(bb);
         }
 
@@ -352,29 +354,29 @@ public class ColumnsExamples {
 
         //  Initialize with an empty accumulator
         ArrayList<Block> accum = new ArrayList<Block>();
-
+        int randArrIndex = Main.rand.nextInt(listMatches.size());
         t.checkExpect(
                 //  TODO: change the input block to a random one in the list - because it doesn't matter
-                pf1.longestSameColor(listMatches.get(0), sentBlock, accum),
+                pf1.longestSameColor(listMatches.get(randArrIndex), sentBlock, accum),
                 list,
                 "testPlayFieldLongestSameColor - horizontal row of matches"
         );
 
     }
 
-    */
+
 
     /*
     public void testPlayFieldUpdateMatches(Tester t) {
         // Test for all rows
-        for (int yy = 0; yy <= PlayField.playAreaHeight; yy++) {
+        for (int yy = 0; yy <= PlayField.MAX_HEIGHT_INDEX; yy++) {
             // Make an empty PlayField
             PlayField pf1 = new PlayField();
             PlayField pf2 = pf1;
             int randType = 1;
 
             // Fill playfield with matches for an entire row
-            for (int horizMatch = 0; horizMatch <= PlayField.playAreaWidth; horizMatch++) {
+            for (int horizMatch = 0; horizMatch <= PlayField.MAX_WIDTH_INDEX; horizMatch++) {
                 Posn psn = new Posn(horizMatch, yy);
                 Block bl = new Block(psn, BlockType.values()[randType]);
                 pf1 = pf1.replace(bl);

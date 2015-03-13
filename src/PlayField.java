@@ -1,10 +1,7 @@
-import javalib.colors.Blue;
 import javalib.worldimages.OverlayImages;
 import javalib.worldimages.Posn;
-import javalib.worldimages.RectangleImage;
 import javalib.worldimages.WorldImage;
 
-import java.awt.*;
 import java.util.ArrayList;
 
 public class PlayField implements TwoDSpaces {
@@ -12,8 +9,8 @@ public class PlayField implements TwoDSpaces {
     // Since we are using indices for ArrayList, 0,0 is a valid X/Y.
     // Directions: Specify the columns and rows in ColumnsWorld,
     // and they will be converted here to their proper indices
-    public static final int playAreaWidth = (ColumnsWorld.PLAY_COLUMNS - 1);
-    public static final int playAreaHeight = (ColumnsWorld.PLAY_ROWS - 1);
+    public static final int MAX_WIDTH_INDEX = (ColumnsWorld.PLAY_COLUMNS - 1);
+    public static final int MAX_HEIGHT_INDEX = (ColumnsWorld.PLAY_ROWS - 1);
     public static final int playArea = (ColumnsWorld.PLAY_COLUMNS * ColumnsWorld.PLAY_ROWS);
     public int score = 0;
 
@@ -26,10 +23,9 @@ public class PlayField implements TwoDSpaces {
                 //  Why should this be minus 1?
                 new ArrayList<Block>(PlayField.playArea);
         //  For loop; fill the field with empty Blocks
-        System.out.println("Filling field with EMT Blocks");
-        for (int ix = 0; ix <= PlayField.playAreaWidth; ix++) {
-            for (int iy = 0; iy <= PlayField.playAreaHeight; iy++) {
-                // TODO: Check the i and j values
+        //System.out.println("Filling field with EMT Blocks");
+        for (int ix = 0; ix <= PlayField.MAX_WIDTH_INDEX; ix++) {
+            for (int iy = 0; iy <= PlayField.MAX_HEIGHT_INDEX; iy++) {
                 //System.out.println("ix: " + ix + ", iy: " + iy);
                 this.field.add(
                         new Block(
@@ -41,7 +37,7 @@ public class PlayField implements TwoDSpaces {
 
         //  TODO: Make a new player piece on init
         //  Choose a random x for the PlayerPiece
-        int playerInitX = Main.rand.nextInt(PlayField.playAreaWidth) * ColumnsWorld.BLOCK_SIZE;
+        int playerInitX = Main.rand.nextInt(PlayField.MAX_WIDTH_INDEX) * ColumnsWorld.BLOCK_SIZE;
         this.playerPiece = new PlayerPiece(playerInitX);
     }
 
@@ -54,11 +50,11 @@ public class PlayField implements TwoDSpaces {
     }
 
     public int width() {
-        return PlayField.playAreaWidth;
+        return PlayField.MAX_WIDTH_INDEX;
     }
 
     public int height() {
-        return PlayField.playAreaHeight;
+        return PlayField.MAX_HEIGHT_INDEX;
     }
 
     public PlayField replace(Block bb) {
@@ -75,7 +71,7 @@ public class PlayField implements TwoDSpaces {
     }
 
     public Block getAtXY(Posn pp) throws RuntimeException {
-        Block outB = new Block(new Posn(-1, -1), BlockType.EMT);
+        Block outB = new Block(new Posn(-5, -5), BlockType.EMT);
         //  Loop through all the blocks in the field
         for (Block b : field) {
             if (b.isSamePosn(pp)) {
@@ -84,7 +80,7 @@ public class PlayField implements TwoDSpaces {
         }
 
         //  Using a sentinel value : posn x, y can never be -1
-        if (outB.equals(new Block(new Posn(-1, -1), BlockType.EMT))) {
+        if (outB.equals(new Block(new Posn(-5, -5), BlockType.EMT))) {
             // TODO: Catch the RuntimeException in the caller of outB
             throw new RuntimeException("ERROR: Block with Posn( " + pp.x + ", " + pp.y + " ) not found");
         }
@@ -248,8 +244,8 @@ public class PlayField implements TwoDSpaces {
     @Override
     public String toString() {
         return "PlayField{" +
-                "playAreaWidth=" + playAreaWidth +
-                ", playAreaHeight=" + playAreaHeight +
+                "MAX_WIDTH_INDEX=" + MAX_WIDTH_INDEX +
+                ", MAX_HEIGHT_INDEX=" + MAX_HEIGHT_INDEX +
                 ", score=" + score +
                 ", field=" + field +
                 ", playerPiece=" + playerPiece +
