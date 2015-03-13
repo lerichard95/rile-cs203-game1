@@ -315,52 +315,65 @@ public class ColumnsExamples {
 
     //  TODO: write test for PlayField.longestSameColor
     public void testPlayFieldLongestSameColor(Tester t) {
-        // TODO: Issue- don't forget the empty blocks- use constructor
-        //  ISSUE: Why can't Posn (0,5) be found???
+        // TODO: Serious issue: Why is getAtXY being called for negative ints?!
 
         PlayField pf1 = new PlayField();
 
         // Make an empty list
         ArrayList<Block> list = new ArrayList<Block>(ColumnsWorld.PLAY_COLUMNS);
+
+
+        //  playerPiece doesn't matter
+        PlayerPiece piece = new PlayerPiece(list, 0, 0);
+        int randType = 1;
+
+
+
+        // Fill list with matches for an entire row
+        for (int changeX = 0; changeX <= (PlayField.MAX_WIDTH_INDEX); changeX++) {
+            //  update 0 to be a yy to loop through all columns
+            Posn psn = new Posn(changeX, 0);
+            System.out.println("filling lists... psn.x: " + psn.x + ", psn.y: " + psn.y);
+            Block bl = new Block(psn, BlockType.values()[randType]);
+            list.add(bl);
+        }
+
         //  Make a list to compare
         ArrayList<Block> listMatches = list;
 
-        //  playerPiece doesn't matter
-        PlayerPiece piece = new PlayerPiece(listMatches, 0, 0);
-        int randType = 1;
-
-        // Fill list with matches for an entire row
-        for (int changeX = 0; changeX <= PlayField.MAX_WIDTH_INDEX; changeX++) {
-            //  update 0 to be a yy to loop through all columns
-            Posn psn = new Posn(changeX, 0);
-            System.out.println("psn.x: " + psn.x + ", psn.y: " + psn.y);
-            Block bl = new Block(psn, BlockType.values()[randType]);
-
-            listMatches.add(bl);
-            list.add(bl);
-
-        }
         //  Add the list of Blocks into the PlayField
-        for (Block bb : listMatches) {
-            System.out.println("bb.posn().x: " + bb.posn().x + ", bb.posn().y: " + bb.posn().y);
+        for (Block bb : list) {
+            System.out.println("adding to list... bb.posn().x: " + bb.posn().x + ", bb.posn().y: " + bb.posn().y);
             pf1 = pf1.replace(bb);
         }
 
         //  Run test for a block, check against the list of Blocks with a horizontal match
-
         //  Initialize with a sentinel block for previous
         Posn sentPos = new Posn(-1, -1);
         Block sentBlock = new Block(sentPos, BlockType.EMT);
 
         //  Initialize with an empty accumulator
         ArrayList<Block> accum = new ArrayList<Block>();
-        int randArrIndex = Main.rand.nextInt(listMatches.size());
+        //int randArrIndex = Main.rand.nextInt(listMatches.size());
+        int randArrIndex = 0;
+
+        for (Block obb : list) {
+
+            System.out.println("obb: " + obb.posn().x + ", " + obb.posn().y);
+            System.out.println("is it in the list?? " + pf1.longestSameColor(list.get(randArrIndex), sentBlock, accum).contains(obb));
+            t.checkExpect(pf1.longestSameColor(list.get(randArrIndex), sentBlock, accum).contains(obb),
+                    true,
+                    "pf1.longestSameColor - item");
+        }
+
+        /*
         t.checkExpect(
                 //  TODO: change the input block to a random one in the list - because it doesn't matter
-                pf1.longestSameColor(listMatches.get(randArrIndex), sentBlock, accum),
-                list,
+                pf1.longestSameColor(list.get(randArrIndex), sentBlock, accum),
+                listMatches.,
                 "testPlayFieldLongestSameColor - horizontal row of matches"
         );
+        */
 
     }
 

@@ -101,7 +101,6 @@ public class PlayField implements TwoDSpaces {
 
     // TODO: Implement longestSameColor
     public ArrayList<Block> longestSameColor(Block bb, Block prevBlock, ArrayList<Block> acc) {
-
         try {
             Posn right = new Posn(bb.posn().x + 1, bb.posn().y);
             Block rightBlock = this.getAtXY(right);
@@ -110,7 +109,7 @@ public class PlayField implements TwoDSpaces {
                 this.longestSameColor(rightBlock, bb, acc);
             }
         } catch (RuntimeException e) {
-            System.out.println(e.toString());
+            System.out.println("longestSameColor() - tried right: " + e.toString());
         }
 
         try {
@@ -121,7 +120,7 @@ public class PlayField implements TwoDSpaces {
                 this.longestSameColor(leftBlock, bb, acc);
             }
         } catch (RuntimeException e) {
-            System.out.println(e.toString());
+            System.out.println("longestSameColor() - tried left: " + e.toString());
         }
 
         try {
@@ -132,7 +131,7 @@ public class PlayField implements TwoDSpaces {
                 this.longestSameColor(aboveBlock, bb, acc);
             }
         } catch (RuntimeException e) {
-            System.out.println(e.toString());
+            System.out.println("longestSameColor() - tried above: " + e.toString());
         }
 
         try {
@@ -143,9 +142,11 @@ public class PlayField implements TwoDSpaces {
                 this.longestSameColor(belowBlock, bb, acc);
             }
         } catch (RuntimeException e) {
-            System.out.println(e.toString());
+            System.out.println("longestSameColor() - tried below: " + e.toString());
         }
-
+        //  TODO: Tester said one test didn't work... hunch tells me that I forgot to add the first block to the accumulator?...
+        //  finally, add the last block
+        acc.add(prevBlock);
         return acc;
     }
 
