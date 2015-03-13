@@ -4,7 +4,9 @@
 ##CURRENT TASK:
 - Write test for playFieldUpdateMatches
 [x] Design test for PlayField.longestSameColor
+--- test is flawed?? Why does Posn (0,5) not appear in the PlayField?...
 - Implement longestSameColor()
+
 - Implement updateMatches()
 
 ===

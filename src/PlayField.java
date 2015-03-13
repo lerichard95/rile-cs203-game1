@@ -14,6 +14,7 @@ public class PlayField implements TwoDSpaces {
     // and they will be converted here to their proper indices
     public static final int playAreaWidth = (ColumnsWorld.PLAY_COLUMNS - 1);
     public static final int playAreaHeight = (ColumnsWorld.PLAY_ROWS - 1);
+    public static final int playArea = (ColumnsWorld.PLAY_COLUMNS * ColumnsWorld.PLAY_ROWS);
     public int score = 0;
 
     ArrayList<Block> field;
@@ -23,7 +24,7 @@ public class PlayField implements TwoDSpaces {
     public PlayField() {
         this.field =
                 //  Why should this be minus 1?
-                new ArrayList<Block>((playAreaWidth * playAreaHeight));
+                new ArrayList<Block>(PlayField.playArea);
         //  For loop; fill the field with empty Blocks
         System.out.println("Filling field with EMT Blocks");
         for (int ix = 0; ix <= PlayField.playAreaWidth; ix++) {
@@ -102,37 +103,51 @@ public class PlayField implements TwoDSpaces {
     // Removed blocks— they will be handled by "gravity"
 
 
-
-
     // TODO: Implement longestSameColor
     public ArrayList<Block> longestSameColor(Block bb, Block prevBlock, ArrayList<Block> acc) {
-        Posn right = new Posn(bb.posn().x + 1, bb.posn().y);
 
-        Block rightBlock = this.getAtXY(right);
-        if (rightBlock.isSameType(bb) && !(rightBlock.equals(prevBlock))) {
-            acc.add(rightBlock);
-            this.longestSameColor(rightBlock, bb, acc);
+        try {
+            Posn right = new Posn(bb.posn().x + 1, bb.posn().y);
+            Block rightBlock = this.getAtXY(right);
+            if (rightBlock.isSameType(bb) && !(rightBlock.equals(prevBlock))) {
+                acc.add(rightBlock);
+                this.longestSameColor(rightBlock, bb, acc);
+            }
+        } catch (RuntimeException e) {
+            System.out.println(e.toString());
         }
 
-        Posn left = new Posn(bb.posn().x - 1, bb.posn().y);
-        Block leftBlock = this.getAtXY(left);
-        if (leftBlock.isSameType(bb) && !(leftBlock.equals(prevBlock))) {
-            acc.add(leftBlock);
-            this.longestSameColor(leftBlock, bb, acc);
+        try {
+            Posn left = new Posn(bb.posn().x - 1, bb.posn().y);
+            Block leftBlock = this.getAtXY(left);
+            if (leftBlock.isSameType(bb) && !(leftBlock.equals(prevBlock))) {
+                acc.add(leftBlock);
+                this.longestSameColor(leftBlock, bb, acc);
+            }
+        } catch (RuntimeException e) {
+            System.out.println(e.toString());
         }
 
-        Posn above = new Posn(bb.posn().x, bb.posn().y - 1);
-        Block aboveBlock = this.getAtXY(above);
-        if (aboveBlock.isSameType(bb) && !(aboveBlock.equals(prevBlock))) {
-            acc.add(aboveBlock);
-            this.longestSameColor(aboveBlock, bb, acc);
+        try {
+            Posn above = new Posn(bb.posn().x, bb.posn().y - 1);
+            Block aboveBlock = this.getAtXY(above);
+            if (aboveBlock.isSameType(bb) && !(aboveBlock.equals(prevBlock))) {
+                acc.add(aboveBlock);
+                this.longestSameColor(aboveBlock, bb, acc);
+            }
+        } catch (RuntimeException e) {
+            System.out.println(e.toString());
         }
 
-        Posn below = new Posn(bb.posn().x, bb.posn().y + 1);
-        Block belowBlock = this.getAtXY(below);
-        if (belowBlock.isSameType(bb) && !(belowBlock.equals(prevBlock))) {
-            acc.add(belowBlock);
-            this.longestSameColor(belowBlock, bb, acc);
+        try {
+            Posn below = new Posn(bb.posn().x, bb.posn().y + 1);
+            Block belowBlock = this.getAtXY(below);
+            if (belowBlock.isSameType(bb) && !(belowBlock.equals(prevBlock))) {
+                acc.add(belowBlock);
+                this.longestSameColor(belowBlock, bb, acc);
+            }
+        } catch (RuntimeException e) {
+            System.out.println(e.toString());
         }
 
         return acc;

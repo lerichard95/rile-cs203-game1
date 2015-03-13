@@ -264,16 +264,19 @@ public class columnsExamples {
 
     //  TODO: write test for PlayField.longestSameColor
     public void testPlayFieldLongestSameColor(Tester t) {
-        //  Make a list of Blocks with a horizontal match to compare
+        // TODO: Issue- don't forget the empty blocks- use constructor
+        //  ISSUE: Why can't Posn (0,5) be found???
+
+        PlayField pf1 = new PlayField();
+
+        //  Make a list to compare
         ArrayList<Block> listMatches = new ArrayList<Block>();
 
         //  playerPiece doesn't matter
         PlayerPiece piece = new PlayerPiece(listMatches, 0, 0);
-        //  score doesn't matter
-        int score = 0;
 
         // Make an empty list
-        ArrayList<Block> list = new ArrayList<Block>((PlayField.playAreaWidth * PlayField.playAreaHeight));
+        ArrayList<Block> list = new ArrayList<Block>(PlayField.playArea);
         int randType = 1;
 
         // Fill list with matches for an entire row
@@ -284,12 +287,14 @@ public class columnsExamples {
             listMatches.add(bl);
             list.add(bl);
         }
-        //  Add the list of Blocks into a PlayField
-        PlayField pf1 = new PlayField(list, piece, score);
+        //  Add the list of Blocks into the PlayField
+        for (Block bb : listMatches) {
+            pf1 = pf1.replace(bb);
+        }
 
         //  Run test for a block, check against the list of Blocks with a horizontal match
 
-        //  Initialize with a sentinel block
+        //  Initialize with a sentinel block for previous
         Posn sentPos = new Posn(-1, -1);
         Block sentBlock = new Block(sentPos, BlockType.EMT);
 
@@ -299,7 +304,7 @@ public class columnsExamples {
         t.checkExpect(
                 //  TODO: change the input block to a random one in the list - because it doesn't matter
                 pf1.longestSameColor(listMatches.get(0), sentBlock, accum),
-                listMatches,
+                list,
                 "testPlayFieldLongestSameColor - horizontal row of matches"
         );
 
