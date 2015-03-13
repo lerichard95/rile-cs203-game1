@@ -8,7 +8,6 @@ import java.util.ArrayList;
 public class ColumnsExamples {
 
     public void testBlockEquals(Tester t) {
-
         for (int i = 0; i <= 100; i++) {
             int a = Main.rand.nextInt();
             int b = Main.rand.nextInt();
@@ -116,7 +115,7 @@ public class ColumnsExamples {
             if (!pos1.equals(pos2)) {
                 t.checkExpect(testBlock2.isSamePosn(testBlock3.posn()),
                         false,
-                        "testBlockIsSamePosn - Different Posn Blocks");
+                        "testBlockIsSamePosn - Different Posn");
             }
         }
     }
@@ -160,47 +159,69 @@ public class ColumnsExamples {
 
     public void testPlayFieldGetAtXY(Tester t) {
         PlayField fieldTest1 = new PlayField();
-
-
         for (int xx = 0; xx < fieldTest1.playAreaWidth; xx++) {
             for (int yy = 0; yy < fieldTest1.playAreaHeight; yy++) {
+
                 Posn pos = new Posn(xx, yy);
                 Block bb = new Block(pos, BlockType.EMT);
                 t.checkExpect(fieldTest1.getAtXY(pos),
                         bb,
                         "testPlayFieldGetAtXY - with EMT blocks");
             }
+        }
 
+        // Make an ArrayList with random typed blocks
+        ArrayList<Block> field2 = new ArrayList<Block>(PlayField.playArea);
+        for (int xx = 0; xx < fieldTest1.playAreaWidth; xx++) {
+            for (int yy = 0; yy < fieldTest1.playAreaHeight; yy++) {
+                int randType = Main.rand.nextInt(BlockType.values().length);
+                Posn pos = new Posn(xx, yy);
+                Block bb = new Block(pos, BlockType.values()[randType]);
+                field2.add(bb);
+            }
+        }
+        // Copy the ArrayList...
+        ArrayList<Block> field3 = field2;
+        //  What is inside this doesn't matter for test purposes
+        ArrayList<Block> arPlayerPiece = new ArrayList<Block>(10);
+        //  Ints also don't matter for testing purposes
+        int randInt = Main.rand.nextInt();
+        PlayerPiece piece = new PlayerPiece(arPlayerPiece, randInt, randInt);
+        int score = 0;
+
+        // Make a playfield from the array
+        PlayField testField2 = new PlayField(field2, piece, score);
+
+        // Retrieve blocks from the PlayField and check against the blocks from the array
+        for (Block bx : field2) {
+            t.checkExpect(
+                    testField2.getAtXY(bx.posn()),
+                    bx,
+                    "testPlayFieldGetAtXY - random BlockType");
         }
     }
 
     public void testPinholeSameValues(Tester t) {
-        int a = Main.rand.nextInt();
-        int b = Main.rand.nextInt();
-        Posn testPosn1 = new Posn(a, b);
-        //  Convert the index to a pixel corner
-        int aa = a * ColumnsWorld.BLOCK_SIZE;
-        int bb = b * ColumnsWorld.BLOCK_SIZE;
-        Posn testPosn2 = new Posn(aa, bb);
-        //  Convert the pixel corner to a pinhole
-        int aaa = aa + (ColumnsWorld.BLOCK_SIZE / 2);
-        int bbb = bb + (ColumnsWorld.BLOCK_SIZE / 2);
-        Posn testPosn3 = new Posn(aaa, bbb);
+        for (int xt = 0; xt <= 100; xt++) {
+            int a = Main.rand.nextInt();
+            int b = Main.rand.nextInt();
+            Posn testPosn1 = new Posn(a, b);
+            //  Convert the index to a pixel corner
+            int aa = a * ColumnsWorld.BLOCK_SIZE;
+            int bb = b * ColumnsWorld.BLOCK_SIZE;
+            Posn testPosn2 = new Posn(aa, bb);
+            //  Convert the pixel corner to a pinhole
+            int aaa = aa + (ColumnsWorld.BLOCK_SIZE / 2);
+            int bbb = bb + (ColumnsWorld.BLOCK_SIZE / 2);
+            Posn testPosn3 = new Posn(aaa, bbb);
 
-        Pinhole testPin1 = new Pinhole(testPosn2);
-        t.checkExpect(
-                testPin1.sameValues(testPosn3),
-                true,
-                "Pinhole and a Posn - Same values"
-        );
-
-        //  Pinhole and a Posn - Different values
-
-        //  Pinhole and a Pinhole - Same values
-
-        //  Pinhole and a Pinhole - Different values
-
-
+            Pinhole testPin1 = new Pinhole(testPosn2);
+            t.checkExpect(
+                    testPin1.sameValues(testPosn3),
+                    true,
+                    "Pinhole and a Posn - Same values"
+            );
+        }
     }
 
     public void testPlayFieldReplace(Tester t) {
