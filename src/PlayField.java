@@ -236,7 +236,32 @@ public class PlayField implements TwoDSpaces {
 
     // TODO: implement updateGravity()
     public PlayField updateGravity() {
-        return this;
+        PlayField outPf = this;
+        // Make an initial PlayField
+        int initScore = this.score;
+        int initPPX = this.playerPiece.indexX;
+
+        // update gravity for the player, make expectedPlayField
+        ArrayList<Block> expectField = this.field;
+        outPf = new PlayField(this.field, this.playerPiece.updatePlayerGravity(), initScore);
+
+        // Loop through every non-empty block in PlayField, check if there is anything below...
+        // If there is something below, replace the below block with the current block, then clear the current block
+        for (Block bb : expectField) {
+            // Only check non-empty blocks!
+            if (!bb.type().equals(BlockType.EMT)) {
+                Posn belowPos = new Posn(bb.posn().x, bb.posn().y + 1);
+                Block belowBlock = outPf.getAtXY(belowPos);
+                if (belowBlock.type().equals(BlockType.EMT)) {
+                    Block newBlock = new Block(belowPos, bb.type());
+                    //  Clear the current Posn
+                    outPf = outPf.replace(bb.clear(bb.posn()));
+                    //  Update the below Posn with the new block
+                    outPf = outPf.replace(newBlock);
+                }
+            }
+        }
+        return outPf;
     }
 
 
