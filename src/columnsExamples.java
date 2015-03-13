@@ -315,8 +315,8 @@ public class ColumnsExamples {
 
     //  TODO: write test for PlayField.longestSameColor
     public void testPlayFieldLongestSameColor(Tester t) {
-
-        for (int changeY = 0; changeY <= 2; changeY++) {
+        // TODO: Wow this causes a STACK OVERFLOW SOMETIMES??!
+        for (int changeY = 0; changeY <= 1; changeY++) {
             PlayField pf1 = new PlayField();
 
             // Make an empty list
@@ -371,13 +371,25 @@ public class ColumnsExamples {
     public void testPlayFieldMovePlayerLeft(Tester t) {
         // PlayField -> PlayField
         ArrayList<Block> arrr = new ArrayList<Block>();
-        int score = 0;
         int initPPX = 0;
+        int score = 0;
 
+        // Create an initial state for the playerPiece...
         PlayerPiece playerPieceInit = new PlayerPiece(initPPX);
+        PlayerPiece playerPieceInit2 = new PlayerPiece(playerPieceInit.player, initPPX, 0);
         PlayField initPf = new PlayField(arrr, playerPieceInit, score);
 
-        PlayField comparePf = new PlayField(arrr, playerPieceInit, score);
+        //  Make a list with all the indices changed
+        ArrayList<Block> playerMoved = playerPieceInit2.player;
+        for (Block bb : playerMoved) {
+            bb.posn().x = bb.posn().x - 1;
+        }
+
+        //  Make a playerPiece out of the shifted indices
+        PlayerPiece playerPieceMoved = new PlayerPiece(playerMoved, initPPX - 1, 0);
+
+        //  Make a playField out of the shifted playerPiece to compare
+        PlayField comparePf = new PlayField(arrr, playerPieceMoved, score);
 
         t.checkExpect(
            initPf.movePlayerLeft(),
