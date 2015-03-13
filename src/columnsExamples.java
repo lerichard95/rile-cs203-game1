@@ -1,6 +1,7 @@
 import tester.*;
 import javalib.worldimages.Posn;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 
@@ -156,7 +157,7 @@ public class ColumnsExamples {
 
     }
 
-    public void DISABLEtestPlayFieldGetAtXY(Tester t) {
+    public void testPlayFieldGetAtXY(Tester t) {
         PlayField fieldTest1 = new PlayField();
         for (int xx = 0; xx < fieldTest1.MAX_WIDTH_INDEX; xx++) {
             for (int yy = 0; yy < fieldTest1.MAX_HEIGHT_INDEX; yy++) {
@@ -225,7 +226,7 @@ public class ColumnsExamples {
         }
     }
 
-    public void DISABLEtestPlayFieldReplace(Tester t) {
+    public void testPlayFieldReplace(Tester t) {
         for (int asp = 0; asp <= 100; asp++) {
             int x = Main.rand.nextInt();
             int y = Main.rand.nextInt();
@@ -314,7 +315,6 @@ public class ColumnsExamples {
 
 
     //  TODO: write test for PlayField.longestSameColor
-    /*
     public void testPlayFieldLongestSameColor(Tester t) {
         // TODO: Wow this causes a STACK OVERFLOW SOMETIMES??!
         for (int changeY = 0; changeY <= 1; changeY++) {
@@ -337,9 +337,6 @@ public class ColumnsExamples {
                 list.add(bl);
             }
 
-            //  Make a list to compare
-            ArrayList<Block> listMatches = list;
-
             //  Add the list of Blocks into the PlayField
             for (Block bb : list) {
                 System.out.println("adding to list... bb.posn().x: " + bb.posn().x + ", bb.posn().y: " + bb.posn().y);
@@ -357,7 +354,6 @@ public class ColumnsExamples {
             int randArrIndex = 0;
 
             for (Block obb : list) {
-
                 System.out.println("obb: " + obb.posn().x + ", " + obb.posn().y);
                 System.out.println("is it in the list?? " + pf1.longestSameColor(list.get(randArrIndex), sentBlock, accum).contains(obb));
                 t.checkExpect(pf1.longestSameColor(list.get(randArrIndex), sentBlock, accum).contains(obb),
@@ -365,15 +361,10 @@ public class ColumnsExamples {
                         "pf1.longestSameColor - item");
             }
         }
-
-
     }
 
-    */
-
-
     public void testPlayerPieceMoveLeft(Tester t) {
-        for (int initX = 0; initX <= 100; initX++) {
+        for (int initX = -PlayField.MAX_WIDTH_INDEX; initX <= PlayField.MAX_WIDTH_INDEX; initX++) {
             // PlayerPiece -> PlayerPiece
             int initPPX = initX;
             int initPPY = Main.rand.nextInt();
@@ -409,7 +400,7 @@ public class ColumnsExamples {
     }
 
     public void testPlayerPieceMoveRight(Tester t) {
-        for (int initX = 0; initX <= 100; initX++) {
+        for (int initX = -PlayField.MAX_WIDTH_INDEX; initX <= PlayField.MAX_WIDTH_INDEX; initX++) {
             // PlayerPiece -> PlayerPiece
             int initPPX = initX;
             int initPPY = Main.rand.nextInt();
@@ -418,12 +409,12 @@ public class ColumnsExamples {
             PlayerPiece playerPieceInit = new PlayerPiece(initPPX);
             PlayerPiece playerPieceInit2 = new PlayerPiece(playerPieceInit.player, initPPX, initPPY);
 
-            //  Make an ArrayList for the changed indices
+            //  Make an ArrayList for the changed indice
             ArrayList<Block> playerMoved = playerPieceInit2.player;
 
             // Make a PlayerPiece out of the ArrayList, within bounds
             PlayerPiece playerPieceMoved = new PlayerPiece(playerMoved, initPPX, 0);
-            if (initPPX != 0) {
+            if (initPPX != PlayField.MAX_WIDTH_INDEX) {
                 for (Block bb : playerMoved) {
                     bb.posn().x = bb.posn().x - 1;
                 }
@@ -441,6 +432,42 @@ public class ColumnsExamples {
                     "testPlayerPieceMoveRight() - should work"
             );
         }
+    }
+
+    public void testPlayFieldMovePlayerLeft(Tester t) {
+        int initXX = Main.rand.nextInt();
+        int initScore = Main.rand.nextInt();
+        // Make an initial PlayerPiece
+        PlayerPiece initPiece = new PlayerPiece(initXX);
+
+        // Use the PlayerPiece to make an initial PlayField
+        ArrayList<Block> field = new ArrayList<Block>(PlayField.playArea);
+        //  For loop; fill the field with empty Blocks
+        //System.out.println("Filling field with EMT Blocks");
+        for (int ix = 0; ix <= PlayField.MAX_WIDTH_INDEX; ix++) {
+            for (int iy = 0; iy <= PlayField.MAX_HEIGHT_INDEX; iy++) {
+                //System.out.println("ix: " + ix + ", iy: " + iy);
+                field.add(
+                        new Block(
+                                // TODO: All uses of Block constructor need to pass an index
+                                new Posn(ix, iy),
+                                BlockType.EMT));
+            }
+        }
+        PlayField initPf = new PlayField(field, initPiece, initScore);
+
+        // Make an expected PlayerPiece from the initial PlayerPiece
+        PlayerPiece expectPlayPiece = initPiece.moveLeft();
+
+        // Use the expected PlayerPiece to make a comparison PlayField
+        PlayField expectPf = new PlayField(field, expectPlayPiece, initScore);
+
+        // Run the test to check
+        t.checkExpect(
+                initPf.movePlayerLeft(),
+                expectPf,
+                "testPlayFieldMovePlayerLeft() - Returns a correct PlayField"
+        );
     }
 
 

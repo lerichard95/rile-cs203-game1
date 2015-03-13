@@ -57,7 +57,7 @@ public class PlayerPiece {
         ArrayList<Block> outArray = this.player;
 
         PlayerPiece outPiece = new PlayerPiece(outArray, this.indexX, this.indexY);
-        if (this.indexX != 0) {
+        if (this.indexX != PlayField.MAX_WIDTH_INDEX) {
             for (Block bb : outArray) {
                 bb.posn().x = bb.posn().x + 1;
             }

@@ -72,7 +72,8 @@ Block -> List<Block>
 PlayField (implicit) -> PlayField
 
 [] playerLanding()
-[x] movePlayerLeft()
+
+[??] movePlayerLeft()
 [] movePlayerRight()
 
 
@@ -81,8 +82,8 @@ PlayField (implicit) -> PlayField
 [] findNearestY()
 
 ##PlayerPiece
-[] moveLeft()
-[] moveRight()
+[x] moveLeft()
+[x] moveRight()
 
 [] cycleUp()
 [] cycleDown()
