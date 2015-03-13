@@ -305,8 +305,8 @@ public class PlayField implements TwoDSpaces {
             imageBlocks = new OverlayImages(imageBlocks, bb.draw());
         }
 
+        imageBlocks = new OverlayImages(imageBlocks, this.playerPiece.draw());
         System.out.println("Finished drawing all blocks");
-
         return imageBlocks;
     }
 

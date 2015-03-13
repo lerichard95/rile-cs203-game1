@@ -10,7 +10,7 @@ public class ColumnsWorld extends javalib.funworld.World {
 
     Block testBlock;
 
-    TwoDSpaces playField;
+    PlayField playField;
 
     int score = 0;
     boolean winState = false;
@@ -67,11 +67,13 @@ public class ColumnsWorld extends javalib.funworld.World {
         *   If quickdrop key is pressed, instantly drop the PlayerPiece
         *   EXTRA: If rotation keys are pressed, rotate the PlayerPiece
         */
-    /*public World onKeyEvent(String ke) {
+    public World onKeyEvent(String ke) {
+        ColumnsWorld outWorld = this;
         if (ke.equalsIgnoreCase("left")){
-            //return new ColumnsWorld(playField.);
+            outWorld = new ColumnsWorld(playField.movePlayerLeft(), this.score, this.winState);
         }
-    } /*
+        return outWorld;
+    }
 
 
 

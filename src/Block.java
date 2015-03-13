@@ -69,6 +69,10 @@ public class Block {
     public WorldImage draw() {
         //Return a RectangleImage representing the rectangle
         // TODO: Switch statement, decide what color the block should be drawn
+        Color c = Color.blue;
+        if (this.type().equals(BlockType.EMT)) {
+            c = Color.white;
+        }
 
         Posn posnPixel = new Posn(
                 this.posnIndex.x * ColumnsWorld.BLOCK_SIZE,
@@ -78,7 +82,7 @@ public class Block {
         return new RectangleImage(
                 //  TODO: Decide on colors for blocks
                 new Pinhole(posnPixel)
-                , this.h, this.w, Color.GREEN);
+                , this.h, this.w, c);
     }
 
     /*
