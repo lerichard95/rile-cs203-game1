@@ -73,7 +73,26 @@ public class PlayerPiece {
         }
         return outPiece;
     }
-    
+
+
+    public PlayerPiece updatePlayerGravity() {
+        ArrayList<Block> expectArr = this.player;
+
+        PlayerPiece outPiece;
+
+        if (this.indexY < PlayField.MAX_HEIGHT_INDEX) {
+            int newIndexY = this.indexY + 1;
+            for (Block bb : expectArr) {
+                bb.posn().y = newIndexY;
+            }
+            outPiece = new PlayerPiece(expectArr, this.indexX, newIndexY);
+        } else {
+            outPiece = this;
+        }
+        return outPiece;
+    }
+
+
     // TODO: cycle the order of the blocks upwards one
 
         /*
@@ -92,7 +111,9 @@ public class PlayerPiece {
 
     public WorldImage draw() {
         WorldImage img = player.get(0).draw();
-        for (Block bb : player) { img = new OverlayImages(img, bb.draw()); }
+        for (Block bb : player) {
+            img = new OverlayImages(img, bb.draw());
+        }
         return img;
     }
 

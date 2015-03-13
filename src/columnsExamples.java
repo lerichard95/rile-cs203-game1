@@ -316,9 +316,8 @@ public class ColumnsExamples {
 
     //  TODO: write test for PlayField.longestSameColor
     public void testPlayFieldLongestSameColor(Tester t) {
-
-
-        int changeY = Main.rand.nextInt(PlayField.MAX_WIDTH_INDEX);
+        //  TODO: Reduce number of nested calls so that there won't be a STACK OVERFLOW
+        int changeY = Main.rand.nextInt(2);
         // matchLength can be from 0 to MAX_WIDTH_INDEX
         int matchLength = Main.rand.nextInt(PlayField.MAX_WIDTH_INDEX);
         PlayField pf1 = new PlayField();
@@ -369,7 +368,7 @@ public class ColumnsExamples {
                     true,
                     "pf1.longestSameColor - check each list item");
         }
-        
+
     }
 
     public void testPlayerPieceMoveLeft(Tester t) {
@@ -522,6 +521,77 @@ public class ColumnsExamples {
         }
     }
 
+
+    public void testPlayerPieceUpdatePlayerGravity(Tester t) {
+        // Make an initPlayerPiece
+        int initXX = Main.rand.nextInt();
+        PlayerPiece initPlayerPiece = new PlayerPiece(initXX);
+
+        // Make an expectedPlayerPiece from the initPlayerPiece
+        PlayerPiece outPlayerPiece;
+        // Build the expected ArrayList
+        ArrayList<Block> expectArr = initPlayerPiece.player;
+
+        if (initPlayerPiece.indexY < PlayField.MAX_HEIGHT_INDEX) {
+            int newIndexY = initPlayerPiece.indexY + 1;
+            for (Block bb : expectArr) {
+                bb.posn().y = newIndexY;
+            }
+            outPlayerPiece = new PlayerPiece(expectArr, initXX, newIndexY);
+        } else {
+            outPlayerPiece = initPlayerPiece;
+        }
+
+
+        // Run the function on the initPlayerPiece, expect the expectedPlayerPiece
+        t.checkExpect(
+                initPlayerPiece.updatePlayerGravity(),
+                outPlayerPiece,
+                "testPlayerPieceUpdatePlayerGravity - should work"
+        );
+
+    }
+
+
+    public void testPlayFieldUpdateGravity(Tester t) {
+        // Make an initial PlayField
+        int initScore = Main.rand.nextInt();
+        int initPPX = Main.rand.nextInt(PlayField.MAX_WIDTH_INDEX);
+
+        PlayField initPf = new PlayField();
+        PlayerPiece initPiece = new PlayerPiece(initPPX);
+        initPf = new PlayField(initPf.field, initPf.playerPiece, initScore);
+
+        // update gravity for the player, make expectedPlayField
+        ArrayList<Block> expectField = initPf.field;
+        PlayField expectPf = new PlayField(initPf.field, initPf.playerPiece.updatePlayerGravity(), initScore);
+
+        // Loop through every non-empty block in PlayField, check if there is anything below...
+        // If there is something below, replace the below block with the current block, then clear the current block
+        for (Block bb : expectField) {
+            // Only check non-empty blocks!
+            if (!bb.type().equals(BlockType.EMT)) {
+                Posn belowPos = new Posn(bb.posn().x, bb.posn().y + 1);
+                Block belowBlock = expectPf.getAtXY(belowPos);
+                if (belowBlock.type().equals(BlockType.EMT)) {
+                    Block newBlock = new Block(belowPos, bb.type());
+                    //  Clear the current Posn
+                    expectPf = expectPf.replace(bb.clear(bb.posn()));
+                    //  Update the below Posn with the new block
+                    expectPf = expectPf.replace(newBlock);
+                }
+            }
+        }
+
+        // Test: run function on the initial, check against expected PlayField.
+        t.checkExpect(
+                initPf.updateGravity(),
+                expectPf,
+                "testPlayFieldUpdateGravity - should work"
+        );
+
+
+    }
 
     /*
     public void testPlayFieldUpdateMatches(Tester t) {

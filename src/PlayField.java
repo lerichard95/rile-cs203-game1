@@ -234,6 +234,13 @@ public class PlayField implements TwoDSpaces {
         return new Block(new Posn(0, 0));
     }
 
+    // TODO: implement updateGravity()
+    public PlayField updateGravity() {
+        return this;
+    }
+
+
+
     public WorldImage draw() {
         // TODO: Draw gridlines for background
         // TODO: Research how rectangles with stroke should be drawn...
@@ -277,6 +284,8 @@ public class PlayField implements TwoDSpaces {
 
         return imageBlocks;
     }
+
+
 
     @Override
     public String toString() {

@@ -68,10 +68,12 @@ public class ColumnsWorld extends javalib.funworld.World {
         *   EXTRA: If rotation keys are pressed, rotate the PlayerPiece
         */
     /*public World onKeyEvent(String ke) {
+        if (ke.equalsIgnoreCase("left")){
+            //return new ColumnsWorld(playField.);
+        }
+    } /*
 
-    }
 
-    */
 
     //  WorldEnd worldEnds()
         /*

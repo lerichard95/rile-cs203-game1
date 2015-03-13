@@ -72,21 +72,19 @@ Block -> List<Block>
 PlayField (implicit) -> PlayField
 
 [] playerLanding()
-[] updateGravity()
+[???] updateGravity()
 [x] movePlayerLeft()
 [x] movePlayerRight()
 
 
 // What should quickDrop return anyway???? A new PlayField?
-[] quickDrop()
 [] findNearestY()
 
 ##PlayerPiece
 [x] moveLeft()
 [x] moveRight()
+[x] updatePlayerGravity()
 
-[] cycleUp()
-[] cycleDown()
 
 #Useful notes
 ===
