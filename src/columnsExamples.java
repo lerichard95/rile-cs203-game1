@@ -372,42 +372,75 @@ public class ColumnsExamples {
     */
 
 
-    public void testPlayerPieceMoveLeft(Tester t){
+    public void testPlayerPieceMoveLeft(Tester t) {
         for (int initX = 0; initX <= 100; initX++) {
             // PlayerPiece -> PlayerPiece
-            ArrayList<Block> arrr = new ArrayList<Block>();
             int initPPX = initX;
-            int score = 0;
+            int initPPY = Main.rand.nextInt();
 
             // Create an initial state for the playerPiece...
             PlayerPiece playerPieceInit = new PlayerPiece(initPPX);
-            PlayerPiece playerPieceInit2 = new PlayerPiece(playerPieceInit.player, initPPX, 0);
+            PlayerPiece playerPieceInit2 = new PlayerPiece(playerPieceInit.player, initPPX, initPPY);
 
-            //  Make a list with all the indices changed
+            //  Make an ArrayList for the changed indices
             ArrayList<Block> playerMoved = playerPieceInit2.player;
 
-            PlayerPiece playerPieceMoved = new PlayerPiece(playerMoved, initPPX - 1, 0);
+            // Make a PlayerPiece out of the ArrayList, within bounds
+            PlayerPiece playerPieceMoved = new PlayerPiece(playerMoved, initPPX, 0);
             if (initPPX != 0) {
                 for (Block bb : playerMoved) {
                     bb.posn().x = bb.posn().x - 1;
                 }
                 //  Make a playerPiece out of the shifted indices
-                playerPieceMoved = new PlayerPiece(playerMoved, initPPX - 1, 0);
+                playerPieceMoved = new PlayerPiece(playerMoved, initPPX - 1, initPPY);
             } else {
                 //  Replace the playerPiece, but don't shift index
-                playerPieceMoved = new PlayerPiece(playerMoved, initPPX, 0);
+                playerPieceMoved = new PlayerPiece(playerMoved, initPPX, initPPY);
             }
 
-            //  Make a playField out of the shifted playerPiece to compare
-            PlayField comparePf = new PlayField(arrr, playerPieceMoved, score);
-
+            //  Make a shifted playerPiece to compare
             t.checkExpect(
-                    initPf.movePlayerLeft(),
-                    comparePf,
+                    playerPieceInit2.moveLeft(),
+                    playerPieceMoved,
                     "testPlayFieldMovePlayerLeft() - should work"
             );
         }
 
+    }
+
+    public void testPlayerPieceMoveRight(Tester t) {
+        for (int initX = 0; initX <= 100; initX++) {
+            // PlayerPiece -> PlayerPiece
+            int initPPX = initX;
+            int initPPY = Main.rand.nextInt();
+
+            // Create an initial state for the playerPiece...
+            PlayerPiece playerPieceInit = new PlayerPiece(initPPX);
+            PlayerPiece playerPieceInit2 = new PlayerPiece(playerPieceInit.player, initPPX, initPPY);
+
+            //  Make an ArrayList for the changed indices
+            ArrayList<Block> playerMoved = playerPieceInit2.player;
+
+            // Make a PlayerPiece out of the ArrayList, within bounds
+            PlayerPiece playerPieceMoved = new PlayerPiece(playerMoved, initPPX, 0);
+            if (initPPX != 0) {
+                for (Block bb : playerMoved) {
+                    bb.posn().x = bb.posn().x - 1;
+                }
+                //  Make a playerPiece out of the shifted indices
+                playerPieceMoved = new PlayerPiece(playerMoved, initPPX + 1, initPPY);
+            } else {
+                //  Replace the playerPiece, but don't shift index
+                playerPieceMoved = new PlayerPiece(playerMoved, initPPX, initPPY);
+            }
+
+            //  Make a shifted playerPiece to compare
+            t.checkExpect(
+                    playerPieceInit2.moveRight(),
+                    playerPieceMoved,
+                    "testPlayerPieceMoveRight() - should work"
+            );
+        }
     }
 
 

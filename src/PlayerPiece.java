@@ -36,6 +36,40 @@ public class PlayerPiece {
         this.indexY = yy;
     }
 
+    public PlayerPiece moveLeft() {
+        ArrayList<Block> outArray = this.player;
+
+        PlayerPiece outPiece = new PlayerPiece(outArray, this.indexX, this.indexY);
+        if (this.indexX != 0) {
+            for (Block bb : outArray) {
+                bb.posn().x = bb.posn().x - 1;
+            }
+            //  Make a playerPiece out of the shifted indices
+            outPiece = new PlayerPiece(outArray, this.indexX - 1, this.indexY);
+        } else {
+            //  Replace the playerPiece, but don't shift index
+            outPiece = new PlayerPiece(outArray, this.indexX, this.indexY);
+        }
+        return outPiece;
+    }
+
+    public PlayerPiece moveRight() {
+        ArrayList<Block> outArray = this.player;
+
+        PlayerPiece outPiece = new PlayerPiece(outArray, this.indexX, this.indexY);
+        if (this.indexX != 0) {
+            for (Block bb : outArray) {
+                bb.posn().x = bb.posn().x + 1;
+            }
+            //  Make a playerPiece out of the shifted indices
+            outPiece = new PlayerPiece(outArray, this.indexX + 1, this.indexY);
+        } else {
+            //  Replace the playerPiece, but don't shift index
+            outPiece = new PlayerPiece(outArray, this.indexX, this.indexY);
+        }
+        return outPiece;
+    }
+    
     // TODO: cycle the order of the blocks upwards one
 
         /*
