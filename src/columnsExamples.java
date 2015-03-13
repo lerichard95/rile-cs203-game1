@@ -43,12 +43,17 @@ public class columnsExamples {
     public void testBlockClear(Tester t) {
 
         // Exhaustive testing
-        for (int i = 0; i <= 1000; i++) {
-            Block testBlock1 = new Block(new Posn(i, i), BlockType.A);
-            t.checkExpect(testBlock1.clear(new Posn(i, i)),
-                    new Block(new Posn(i, i),
-                            BlockType.EMT),
-                    "Block.clear()");
+        for (int i = 0; i <= 50; i++) {
+            for (int yy = 0; yy <= 50; yy++) {
+                int randType = Main.rand.nextInt(BlockType.values().length);
+                Block testBlock1 = new Block(new Posn(i, yy), BlockType.values()[randType]);
+                t.checkExpect(
+                        testBlock1.clear(new Posn(i, yy)),
+                        new Block(new Posn(i, yy),
+                                BlockType.EMT),
+                        "Block.clear()");
+            }
+
         }
 
     }
@@ -70,19 +75,32 @@ public class columnsExamples {
     }
 
     public void testBlockIsSamePosn(Tester t) {
-        for (int i = 0; i < 1000; i++) {
-            Block testBlock1 = new Block(new Posn(i, i), BlockType.EMT);
-            Block testBlock2 = new Block(new Posn(i, i), BlockType.EMT);
-            t.checkExpect(testBlock1.isSamePosn(testBlock2.posn()),
-                    true,
-                    "testBlockIsSamePosn - Same Posn Blocks");
+
+        for (int i = 0; i < 50; i++) {
+            for (int yy = 0; yy < 50; yy++) {
+                Block testBlock1 = new Block(new Posn(i, yy), BlockType.EMT);
+                Block testBlock2 = new Block(new Posn(i, yy), BlockType.EMT);
+                t.checkExpect(testBlock1.isSamePosn(testBlock2.posn()),
+                        true,
+                        "testBlockIsSamePosn - Same Posn Blocks");
+            }
         }
-        for (int i = 0; i < 1000; i++) {
-            Block testBlock2 = new Block(new Posn(i, i), BlockType.EMT);
-            Block testBlock3 = new Block(new Posn(i + 1, i + 1), BlockType.EMT);
-            t.checkExpect(testBlock2.isSamePosn(testBlock3.posn()),
-                    false,
-                    "testBlockIsSamePosn - Different Posn Blocks");
+
+        for (int i = 100; i < 100; i++) {
+            int a = Main.rand.nextInt();
+            int b = Main.rand.nextInt();
+            int c = Main.rand.nextInt();
+            int d = Main.rand.nextInt();
+            Posn pos1 = new Posn(a,b);
+            Posn pos2 = new Posn(c,d);
+
+            Block testBlock2 = new Block(pos1, BlockType.EMT);
+            Block testBlock3 = new Block(pos2, BlockType.EMT);
+            if (!pos1.equals(pos2)) {
+                t.checkExpect(testBlock2.isSamePosn(testBlock3.posn()),
+                        false,
+                        "testBlockIsSamePosn - Different Posn Blocks");
+            }
         }
     }
 
@@ -262,6 +280,7 @@ public class columnsExamples {
         }
     }
 
+    /*
     //  TODO: write test for PlayField.longestSameColor
     public void testPlayFieldLongestSameColor(Tester t) {
         // TODO: Issue- don't forget the empty blocks- use constructor
@@ -309,6 +328,8 @@ public class columnsExamples {
         );
 
     }
+
+    */
 
     /*
     public void testPlayFieldUpdateMatches(Tester t) {
