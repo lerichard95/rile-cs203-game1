@@ -10,10 +10,13 @@ public class columnsExamples {
     public void testBlockEquals(Tester t) {
 
         for (int i = 0; i <= 100; i++) {
+            int a = Main.rand.nextInt();
+            int b = Main.rand.nextInt();
+
             //  Test for all BlockTypes
             for (int p = 0; p < BlockType.values().length; p++) {
-                Block testBlock1 = new Block(new Posn(i, i), BlockType.values()[p]);
-                Block testBlock2 = new Block(new Posn(i, i), BlockType.values()[p]);
+                Block testBlock1 = new Block(new Posn(a, b), BlockType.values()[p]);
+                Block testBlock2 = new Block(new Posn(a, b), BlockType.values()[p]);
                 t.checkExpect(
                         testBlock1.equals(testBlock2),
                         true
@@ -25,13 +28,15 @@ public class columnsExamples {
             //  p -> q
             for (int p = 0; p < BlockType.values().length; p++) {
                 for (int j = 0; j < BlockType.values().length; j++) {
-                    Block testBlock3 = new Block(new Posn(i, i), BlockType.values()[p]);
-                    Block testBlock4 = new Block(new Posn(i, i), BlockType.values()[j]);
+                    int aa = Main.rand.nextInt();
+                    int bb = Main.rand.nextInt();
+                    Block testBlock3 = new Block(new Posn(aa, bb), BlockType.values()[p]);
+                    Block testBlock4 = new Block(new Posn(aa, bb), BlockType.values()[j]);
                     if (p != j) {
                         t.checkExpect(
                                 testBlock3.equals(testBlock4),
                                 false,
-                                "testBlockEquals - Different BlockTypes"
+                                "testBlockEquals - Different Posns, Different BlockTypes"
                         );
                     }
                 }
@@ -58,7 +63,7 @@ public class columnsExamples {
 
     }
 
-    public void testBlockIsEmpty(Tester t) {
+    public void CtestBlockIsEmpty(Tester t) {
 
         //  TODO: testing: Use a random number to represent that property works "forall"
         for (int i = 0; i <= 1000; i++) {
@@ -78,8 +83,9 @@ public class columnsExamples {
 
         for (int i = 0; i < 50; i++) {
             for (int yy = 0; yy < 50; yy++) {
-                Block testBlock1 = new Block(new Posn(i, yy), BlockType.EMT);
-                Block testBlock2 = new Block(new Posn(i, yy), BlockType.EMT);
+                int randType = Main.rand.nextInt(BlockType.values().length);
+                Block testBlock1 = new Block(new Posn(i, yy), BlockType.values()[randType]);
+                Block testBlock2 = new Block(new Posn(i, yy), BlockType.values()[randType]);
                 t.checkExpect(testBlock1.isSamePosn(testBlock2.posn()),
                         true,
                         "testBlockIsSamePosn - Same Posn Blocks");
@@ -91,8 +97,8 @@ public class columnsExamples {
             int b = Main.rand.nextInt();
             int c = Main.rand.nextInt();
             int d = Main.rand.nextInt();
-            Posn pos1 = new Posn(a,b);
-            Posn pos2 = new Posn(c,d);
+            Posn pos1 = new Posn(a, b);
+            Posn pos2 = new Posn(c, d);
 
             Block testBlock2 = new Block(pos1, BlockType.EMT);
             Block testBlock3 = new Block(pos2, BlockType.EMT);
@@ -106,12 +112,10 @@ public class columnsExamples {
 
     public void testBlockIsSameType(Tester t) {
         for (int p = 0; p < BlockType.values().length; p++) {
-            // TODO: Replace 0's with randoms, since posns don't matter
             int a = Main.rand.nextInt();
             int b = Main.rand.nextInt();
             int c = Main.rand.nextInt();
             int d = Main.rand.nextInt();
-
 
             Block testBlock1 = new Block(new Posn(a, b), BlockType.values()[p]);
             Block testBlock2 = new Block(new Posn(c, d), BlockType.values()[p]);
@@ -122,17 +126,13 @@ public class columnsExamples {
             );
         }
 
-
-        //  TODO: How do you set up tests to guarantee different values?
-
         for (int p = 0; p < BlockType.values().length; p++) {
-            for (int j = 1; j < BlockType.values().length; j++) {
+            for (int j = 0; j < BlockType.values().length; j++) {
                 if (p != j) {
                     int aa = Main.rand.nextInt();
                     int bb = Main.rand.nextInt();
                     int cc = Main.rand.nextInt();
                     int dd = Main.rand.nextInt();
-
                     Block testBlock3 = new Block(new Posn(aa, bb), BlockType.values()[p]);
                     Block testBlock4 = new Block(new Posn(cc, dd), BlockType.values()[j]);
                     t.checkExpect(

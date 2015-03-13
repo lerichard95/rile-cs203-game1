@@ -48,10 +48,13 @@ Functions to run tests on
 ##Block
 
 [x] clear() - exhaustive
-[x] equals() - exhaustive, random
-[x] isEmpty() - exhaustive
 [x] isSamePosn() - exhaustive
 [x] isSameType() - exhaustive, random
+[x] isEmpty() - exhaustive
+[x] equals() - exhaustive, random
+
+
+
 
 ##ColumnsWorld
 
