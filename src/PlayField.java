@@ -110,7 +110,7 @@ public class PlayField implements TwoDSpaces {
     }
 
     // TODO: Implement longestSameColor
-    public PlayField longestSameColor(){
+    public PlayField longestSameColor(Block bb){
 
     }
 

@@ -264,9 +264,13 @@ public class columnsExamples {
 
     //  TODO: write test for PlayField.longestSameColor
     public void testPlayFieldLongestSameColor(Tester t) {
-        //  Make a list of Blocks with a horizontal match
+        //  Make a list of Blocks with a horizontal match to compare
+        ArrayList<Block> listMatches = new ArrayList<Block>();
+
         //  playerPiece doesn't matter
+        PlayerPiece piece = new PlayerPiece(listMatches, 0, 0);
         //  score doesn't matter
+        int score = 0;
 
         // Make an empty list
         ArrayList<Block> list = new ArrayList<Block>();
@@ -277,13 +281,19 @@ public class columnsExamples {
             //  update 0 to be a yy to loop through all columns
             Posn psn = new Posn(0, horizMatch);
             Block bl = new Block(psn, BlockType.values()[randType]);
+            listMatches.add(bl);
             list.add(bl);
         }
         //  Add the list of Blocks into a PlayField
         PlayField pf1 = new PlayField(list, piece, score);
 
-        //  Run test, check against the list of Blocks with a horizontal match
-
+        //  Run test for a block, check against the list of Blocks with a horizontal match
+        t.checkExpect(
+                //  TODO: change the input block to a random one in the list - because it doesn't matter
+                pf1.longestSameColor( listMatches.get(0) ),
+                listMatches,
+                "testPlayFieldLongestSameColor - horizontal row of matches"
+        );
 
     }
 
