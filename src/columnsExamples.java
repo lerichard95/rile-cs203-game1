@@ -5,7 +5,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 
-public class columnsExamples {
+public class ColumnsExamples {
 
     public void testBlockEquals(Tester t) {
 
@@ -20,7 +20,7 @@ public class columnsExamples {
                 t.checkExpect(
                         testBlock1.equals(testBlock2),
                         true
-                        , "BlockPosnEquals, same BlockType");
+                        , "BlockPosnEquals, same Posn, same BlockType");
             }
 
             //  TODO: How do you set up tests to guarantee different values?
@@ -31,17 +31,28 @@ public class columnsExamples {
                     int aa = Main.rand.nextInt();
                     int bb = Main.rand.nextInt();
                     Block testBlock3 = new Block(new Posn(aa, bb), BlockType.values()[p]);
-                    Block testBlock4 = new Block(new Posn(aa, bb), BlockType.values()[j]);
+                    Block testBlock4 = new Block(new Posn(bb, aa), BlockType.values()[j]);
                     if (p != j) {
                         t.checkExpect(
                                 testBlock3.equals(testBlock4),
                                 false,
-                                "testBlockEquals - Different Posns, Different BlockTypes"
+                                "testBlockEquals - Different Posn, Different BlockType"
                         );
                     }
                 }
             }
 
+            for (int p = 0; p < BlockType.values().length; p++) {
+                int aa = Main.rand.nextInt();
+                int bb = Main.rand.nextInt();
+                Block testBlock3 = new Block(new Posn(aa, bb), BlockType.values()[p]);
+                Block testBlock4 = new Block(new Posn(bb, aa), BlockType.values()[p]);
+                t.checkExpect(
+                        testBlock3.equals(testBlock4),
+                        false,
+                        "testBlockEquals - Different Posns, Same BlockTypes"
+                );
+            }
         }
     }
 

@@ -10,7 +10,7 @@ public class Main {
     public static void main(String[] args) {
 
         //  Using the tester library...
-        columnsExamples columnsExamples = new columnsExamples();
+        ColumnsExamples columnsExamples = new ColumnsExamples();
         Tester.run(columnsExamples);
 
         System.out.println("starting game...");

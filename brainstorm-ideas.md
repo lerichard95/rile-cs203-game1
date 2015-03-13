@@ -45,32 +45,27 @@ DONT TEST CONSTRUCTORS BECAUSE logic doesn't make sense to do that
 
 #TEST CHECKLIST
 Functions to run tests on
-##Block
 
+##ColumnsWorld
+
+##Block
 [x] clear() - exhaustive
 [x] isSamePosn() - exhaustive
 [x] isSameType() - exhaustive, random
 [x] isEmpty() - exhaustive
 [x] equals() - exhaustive, random
 
-
-
-
-##ColumnsWorld
-
-
-##PlayerPiece
-
-[] cycleUp()
-[] cycleDown()
+#Pinhole
+[x] Pinhole()
+[x] samePosn() - Random, sufficient for testing the constructor
+because the test uses the constructor.
 
 ##PlayField
 
 [x] getAtXY() - exhaustive
 [x] replace() - uses random
 [x] remove() - uses random
-
-###game mechanics functions
+####game mechanics functions
 [] longestSameColor()
 Block -> List<Block>
 
@@ -85,10 +80,10 @@ PlayField (implicit) -> PlayField
 [] quickDrop()
 [] findNearestY()
 
-#Pinhole
-[x] Pinhole()
-[x] samePosn() - Random, sufficient for testing the constructor
-because the test uses the constructor.
+##PlayerPiece
+
+[] cycleUp()
+[] cycleDown()
 
 #Useful notes
 ===
