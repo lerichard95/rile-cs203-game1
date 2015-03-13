@@ -371,9 +371,10 @@ public class ColumnsExamples {
 
     */
 
-    public void testPlayFieldMovePlayerLeft(Tester t) {
+
+    public void testPlayerPieceMoveLeft(Tester t){
         for (int initX = 0; initX <= 100; initX++) {
-            // PlayField -> PlayField
+            // PlayerPiece -> PlayerPiece
             ArrayList<Block> arrr = new ArrayList<Block>();
             int initPPX = initX;
             int score = 0;
@@ -381,10 +382,8 @@ public class ColumnsExamples {
             // Create an initial state for the playerPiece...
             PlayerPiece playerPieceInit = new PlayerPiece(initPPX);
             PlayerPiece playerPieceInit2 = new PlayerPiece(playerPieceInit.player, initPPX, 0);
-            PlayField initPf = new PlayField(arrr, playerPieceInit, score);
 
             //  Make a list with all the indices changed
-
             ArrayList<Block> playerMoved = playerPieceInit2.player;
 
             PlayerPiece playerPieceMoved = new PlayerPiece(playerMoved, initPPX - 1, 0);
@@ -409,8 +408,8 @@ public class ColumnsExamples {
             );
         }
 
-
     }
+
 
     /*
     public void testPlayFieldUpdateMatches(Tester t) {
